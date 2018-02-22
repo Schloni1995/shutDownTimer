@@ -13,6 +13,7 @@ public class ShutDownTimerGUI extends JFrame
 
 	public ShutDownTimerGUI()
 	{
+		setTitle("ShutDownTimer");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		getContentPane().add(getTabbedPane());
 		setVisible(true);
@@ -24,8 +25,8 @@ public class ShutDownTimerGUI extends JFrame
 		if (tabbedPane == null)
 		{
 			tabbedPane = new JTabbedPane();
-			tabbedPane.add("S/Min/H", new Tab1());
-			tabbedPane.add("Inhalt folgt...", new Tab2());
+			tabbedPane.add("Dauer", new Tab1());
+			tabbedPane.add("Zeitpunkt", new Tab2());
 		}
 		return tabbedPane;
 	}

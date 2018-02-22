@@ -27,10 +27,7 @@ public class Tab1 extends JPanel
 	private final String defaultTextString;
 	private JLabel einheitTextLabel;
 	private JPanel inputPanel;
-	// private JLabel countDownTimeLabel;
-	// private JPanel countDownTimePanel;
 	private KeyAdapter ka;
-	// private JPanel contentBotPanel;
 	private JTextField timeField;
 	@SuppressWarnings("rawtypes")
 	private JComboBox unitBox;
@@ -38,14 +35,13 @@ public class Tab1 extends JPanel
 
 	public Tab1()
 	{
-		defaultTextString = "Bitte gib die gewï¿½nschte Zeit ein.";
+		defaultTextString = "Bitte gib die gewünschte Zeit ein.";
 		units = new String[] { "Sekunden", "Minuten", "Stunden" };
 
 		setOpaque(false);
 		setLayout(new BorderLayout());
 		add(getInputPanel(), BorderLayout.NORTH);
 		add(getMidContent(), BorderLayout.CENTER);
-		// add(getBotContent(), BorderLayout.SOUTH);
 	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
@@ -64,14 +60,6 @@ public class Tab1 extends JPanel
 		if (countDownLabel == null) countDownLabel = new JLabel("Restzeit: ");
 		return countDownLabel;
 	}
-
-	// public JPanel getBotContent()
-	// {
-	// contentBotPanel = new JPanel();
-	// contentBotPanel.setOpaque(false);
-	// contentBotPanel.add(getCountDownTimePanel(""));
-	// return contentBotPanel;
-	// }
 
 	public JPanel getCountDownPanel(final String time, final String unit)
 	{
@@ -162,32 +150,6 @@ public class Tab1 extends JPanel
 		};
 		return ka;
 	}
-
-	// public JPanel getCountDownTimePanel(final String text)
-	// {
-	// // TODO fï¿½r die ZielZeit
-	// if (countDownTimePanel == null)
-	// {
-	// countDownTimePanel = new JPanel();
-	// countDownTimePanel.setOpaque(false);
-	// }
-	// countDownTimePanel.add(getCountDownTimeLabel(""));
-	// return countDownTimePanel;
-	// }
-
-	// public JLabel getCountDownTimeLabel(final String text)
-	// {
-	// if (countDownTimeLabel == null) countDownTimeLabel = new JLabel();
-	//
-	// if (text.trim().length() == 0) countDownTimeLabel.setVisible(false);
-	// else
-	// {
-	// countDownTimeLabel.setText(text);
-	// countDownTimeLabel.setVisible(true);
-	// }
-	//
-	// return countDownTimeLabel;
-	// }
 
 	public JPanel getMidContent()
 	{
