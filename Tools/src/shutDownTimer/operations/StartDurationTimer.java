@@ -8,17 +8,17 @@ import javax.swing.JOptionPane;
 
 import shutDownTimer.tabs.Tab1;
 
-public class StartTimer
+public class StartDurationTimer
 {
 	public int cdH, cdMin, cdS;
 	private final Timer timer = new Timer();
 
-	public StartTimer(final Tab1 tab, final int response, final String unit, final String time, final int cdH,
+	public StartDurationTimer(final Tab1 tab, final int response, final String unit, final String time, final int cdH,
 			final int cdMin, final int cdS, final int tNow)
 	{
-		StartTimer.this.cdH = cdH;
-		StartTimer.this.cdMin = cdMin;
-		StartTimer.this.cdS = cdS;
+		StartDurationTimer.this.cdH = cdH;
+		StartDurationTimer.this.cdMin = cdMin;
+		StartDurationTimer.this.cdS = cdS;
 		if (response == JOptionPane.YES_OPTION)
 		{
 			timer.schedule(new TimerTask()
@@ -26,16 +26,16 @@ public class StartTimer
 				@Override
 				public void run()
 				{
-					tab.setCountDownText(StartTimer.this.cdH + " Stunden " + StartTimer.this.cdMin + " Minuten "
-							+ StartTimer.this.cdS + " Sekunden");
+					tab.setCountDownText(StartDurationTimer.this.cdH + " Stunden " + StartDurationTimer.this.cdMin + " Minuten "
+							+ StartDurationTimer.this.cdS + " Sekunden");
 					tab.revalidate();
-					if (--StartTimer.this.cdS < 0)
+					if (--StartDurationTimer.this.cdS < 0)
 					{
-						StartTimer.this.cdS = 59;
-						if (--StartTimer.this.cdMin < 0)
+						StartDurationTimer.this.cdS = 59;
+						if (--StartDurationTimer.this.cdMin < 0)
 						{
-							StartTimer.this.cdMin = 59;
-							if (--StartTimer.this.cdH < 0) timer.cancel();
+							StartDurationTimer.this.cdMin = 59;
+							if (--StartDurationTimer.this.cdH < 0) timer.cancel();
 						}
 					}
 

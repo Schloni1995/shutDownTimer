@@ -15,7 +15,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import shutDownTimer.operations.StartTimer;
+import shutDownTimer.operations.StartDurationTimer;
 import shutDownTimer.operations.StopTimer;
 
 public class Tab1 extends JPanel
@@ -138,7 +138,7 @@ public class Tab1 extends JPanel
 					System.out.println("cdH cdMin cdS  " + cdH + " " + cdMin + " " + cdS);
 					System.out.println("tNow " + tNow);
 
-					timer = new StartTimer(Tab1.this, response, unit, time, cdH, cdMin, cdS, tNow).getTimer();
+					timer = new StartDurationTimer(Tab1.this, response, unit, time, cdH, cdMin, cdS, tNow).getTimer();
 				}
 				else if (evt.getKeyCode() == KeyEvent.VK_ESCAPE)
 				{
