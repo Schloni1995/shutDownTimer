@@ -131,14 +131,15 @@ public class Tab1 extends JPanel
 					final int response = JOptionPane.showConfirmDialog(null,
 							"Soll der Rechner in " + time + " " + unit + " herunterfahren?", "Sicher?",
 							JOptionPane.YES_NO_OPTION);
+					if (response == JOptionPane.YES_OPTION)
+					{
+						timer = new StartDurationTimer(Tab1.this, unit, time, cdH, cdMin, cdS, tNow).getTimer();
+					}
+					else
+					{
+						JOptionPane.showMessageDialog(Tab1.this, "Pc wird nicht heruntergefahren");
 
-					System.out.println("response " + response);
-					System.out.println("unit " + unit);
-					System.out.println("time " + time);
-					System.out.println("cdH cdMin cdS  " + cdH + " " + cdMin + " " + cdS);
-					System.out.println("tNow " + tNow);
-
-					timer = new StartDurationTimer(Tab1.this, response, unit, time, cdH, cdMin, cdS, tNow).getTimer();
+					}
 				}
 				else if (evt.getKeyCode() == KeyEvent.VK_ESCAPE)
 				{

@@ -20,12 +20,6 @@ public class Tab2 extends JPanel
 
 	private Vector<String> h, min, s;
 
-	// public static void main(String[] args)
-	// {
-	// TODO Calendar cal = Calendar.getInstance(Locale.GERMAN);
-	// System.out.println(cal.getTime());
-	// }
-
 	public Tab2()
 	{
 		initArray();
@@ -90,6 +84,7 @@ public class Tab2 extends JPanel
 				if (ke.getKeyCode() == KeyEvent.VK_ENTER)
 				{
 					//DO STUFF
+					
 				}
 			}
 		};
