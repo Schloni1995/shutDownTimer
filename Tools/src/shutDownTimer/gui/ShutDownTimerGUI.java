@@ -17,7 +17,6 @@ public class ShutDownTimerGUI extends JFrame
 		getContentPane().add(getTabbedPane());
 		setVisible(true);
 		pack();
-		// setSize(500, 500);
 	}
 
 	private JTabbedPane getTabbedPane()
