@@ -8,6 +8,7 @@ import java.awt.event.FocusEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.Timer;
+import java.util.logging.Logger;
 
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -20,6 +21,7 @@ import shutDownTimer.operations.StopTimer;
 
 public class Tab1 extends JPanel
 {
+	private static final Logger log = Logger.getLogger(Tab1.class.getName());
 	private static final long serialVersionUID = 1586228218070110746L;
 	private JPanel contentMidPanel;
 	private JLabel countDownLabel;
@@ -100,31 +102,30 @@ public class Tab1 extends JPanel
 			{
 				final String unitString = unitBox.getSelectedItem().toString();
 				final String timeString = timeField.getText();
-				
-				int targetDuration;
-				int cdH = 0, cdMin = 0, cdS = 0;
-				
+
 				if (evt.getKeyCode() == KeyEvent.VK_ENTER)
 				{
-					targetDuration = Integer.parseInt(timeString);
+					int cdH = 0, cdMin = 0, cdS = 0;
+					int durationInSec = Integer.parseInt(timeString);
+
 					switch (unitString)
 					{
 						case "Stunden":
-							cdH = targetDuration;
+							cdH = durationInSec;
 							cdMin = 0;
 							cdS = 0;
-							targetDuration *= 3600;
+							durationInSec *= 3600;
 							break;
 						case "Minuten":
-							cdH = targetDuration / 60;
-							cdMin = targetDuration % 60;
+							cdH = durationInSec / 60;
+							cdMin = durationInSec % 60;
 							cdS = 0;
-							targetDuration *= 60;
+							durationInSec *= 60;
 							break;
 						case "Sekunden":
-							cdH = targetDuration / 3600;
-							cdMin = targetDuration / 60;
-							cdS = targetDuration % 60;
+							cdH = durationInSec / 3600;
+							cdMin = durationInSec / 60;
+							cdS = durationInSec % 60;
 							break;
 						default:
 							cdH = 0;
@@ -132,21 +133,26 @@ public class Tab1 extends JPanel
 							cdS = 0;
 							break;
 					}
-
-					final int response = JOptionPane.showConfirmDialog(null,
-							"Soll der Rechner in " + timeString + " " + unitString + " herunterfahren?", "Sicher?",
-							JOptionPane.YES_NO_OPTION);
+					String msg = "Soll der Rechner in " + timeString + " " + unitString + " herunterfahren?";
+					final int response = JOptionPane.showConfirmDialog(null, msg, "Sicher?", JOptionPane.YES_NO_OPTION);
 					if (response == JOptionPane.YES_OPTION)
-						timer = new StartDurationTimer(Tab1.this, unitString, timeString, cdH, cdMin, cdS, targetDuration)
-								.getTimer();
+					{
+						log.fine(cdH + " " + cdMin + " " + cdS);
+						timer = new StartDurationTimer(Tab1.this, unitString,timeString, cdH, cdMin, cdS, durationInSec).getTimer();
+					}
 					else
 						JOptionPane.showMessageDialog(Tab1.this, "Pc wird nicht heruntergefahren");
 				}
 				else if (evt.getKeyCode() == KeyEvent.VK_ESCAPE)
 				{
-					getCountDownPanel("", "");
-					new StopTimer(timer);
-					JOptionPane.showMessageDialog(Tab1.this, "Herunterfahren wurde abgebrochen");
+					if (timer != null)
+					{
+						getCountDownPanel("", "");
+						new StopTimer(timer);
+						JOptionPane.showMessageDialog(Tab1.this, "Herunterfahren wurde abgebrochen");
+					}
+					else
+						JOptionPane.showMessageDialog(Tab1.this, "Timer nicht vorhanden");
 				}
 			}
 		};

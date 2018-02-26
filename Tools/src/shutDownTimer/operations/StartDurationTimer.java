@@ -2,47 +2,58 @@ package shutDownTimer.operations;
 
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.logging.Logger;
 
 import shutDownTimer.gui.tabs.Tab1;
 
 public class StartDurationTimer
 {
-	public int cdH, cdMin, cdS;
-	private final Timer timer = new Timer();
+	private Timer timer;
+	public int h;
+	public int m;
+	public int s;
+	private static final Logger log = Logger.getLogger(StartDurationTimer.class.getName());
 
-	public StartDurationTimer(final Tab1 tab, final String unitString, final String timeString, final int cdH, final int cdMin,
-			final int cdS, final int duration)
+	public StartDurationTimer(final Tab1 tab, final String unitString, final String timeString, final int cdH,
+			final int cdMin, final int cdS, final int durationInSec)
 	{
-		StartDurationTimer.this.cdH = cdH;
-		StartDurationTimer.this.cdMin = cdMin;
-		StartDurationTimer.this.cdS = cdS;
+		log.finer(cdH + " " + cdMin + " " + cdS);
+		timer = new Timer();
+		timer.schedule(getTask(cdH, cdMin, cdS, tab), 0, 1000);
+		new ShutDown(durationInSec);
+		//TODO tab.getCountDownTimePanel(tab.getTargetTime());	
+	}
 
-		timer.schedule(new TimerTask()
+	private TimerTask getTask(final int cdH, final int cdMin, final int cdS, Tab1 tab)
+	{
+		h = cdH;
+		m = cdMin;
+		s = cdS;
+		TimerTask tt = new TimerTask()
 		{
 			@Override
 			public void run()
 			{
-				tab.setCountDownText(StartDurationTimer.this.cdH + " Stunden " + StartDurationTimer.this.cdMin
-						+ " Minuten " + StartDurationTimer.this.cdS + " Sekunden");
-				tab.revalidate();
-				if (--StartDurationTimer.this.cdS < 0)
+				log.info(h + " " + m + " " + " " + s);
+				tab.setCountDownText(h + " Stunden " + m + " Minuten " + s + " Sekunden");
+
+				if (h<=0 && m<=0 && s==0)
 				{
-					StartDurationTimer.this.cdS = 59;
-					if (--StartDurationTimer.this.cdMin < 0)
-					{
-						StartDurationTimer.this.cdMin = 59;
-						if (--StartDurationTimer.this.cdH < 0) timer.cancel();
-					}
+					timer.cancel();
 				}
-
+				if (--s < 0)
+				{
+					s = 59;
+					m--;
+				}
+				if (m < 0)
+				{
+					m = 59;
+					h--;
+				}
 			}
-		}, 0, 1000);
-
-		tab.setCountDownText(duration + " " + unitString);
-		// tab.getCountDownTimePanel(tab.getTargetTime());
-		new ShutDown(duration);
-		tab.revalidate();
-
+		};
+		return tt;
 	}
 
 	public Timer getTimer()
