@@ -98,48 +98,49 @@ public class Tab1 extends JPanel
 			@Override
 			public void keyPressed(final KeyEvent evt)
 			{
-				final String unit = unitBox.getSelectedItem().toString();
-				final String time = timeField.getText();
-				int tNow = 0;
+				final String unitString = unitBox.getSelectedItem().toString();
+				final String timeString = timeField.getText();
+				
+				int targetDuration;
 				int cdH = 0, cdMin = 0, cdS = 0;
+				
 				if (evt.getKeyCode() == KeyEvent.VK_ENTER)
 				{
-					tNow = Integer.parseInt(time);
-					switch (unit)
+					targetDuration = Integer.parseInt(timeString);
+					switch (unitString)
 					{
-						case "Minuten":
-							cdH = tNow / 60;
-							cdMin = tNow % 60;
-							cdS = 0;
-							tNow *= 60;
-							break;
 						case "Stunden":
-							cdH = tNow;
+							cdH = targetDuration;
 							cdMin = 0;
 							cdS = 0;
-							tNow *= 3600;
+							targetDuration *= 3600;
+							break;
+						case "Minuten":
+							cdH = targetDuration / 60;
+							cdMin = targetDuration % 60;
+							cdS = 0;
+							targetDuration *= 60;
 							break;
 						case "Sekunden":
-							cdH = tNow / 3600;
-							cdMin = tNow / 60;
-							cdS = tNow % 60;
+							cdH = targetDuration / 3600;
+							cdMin = targetDuration / 60;
+							cdS = targetDuration % 60;
 							break;
 						default:
+							cdH = 0;
+							cdMin = 0;
+							cdS = 0;
 							break;
 					}
 
 					final int response = JOptionPane.showConfirmDialog(null,
-							"Soll der Rechner in " + time + " " + unit + " herunterfahren?", "Sicher?",
+							"Soll der Rechner in " + timeString + " " + unitString + " herunterfahren?", "Sicher?",
 							JOptionPane.YES_NO_OPTION);
 					if (response == JOptionPane.YES_OPTION)
-					{
-						timer = new StartDurationTimer(Tab1.this, unit, time, cdH, cdMin, cdS, tNow).getTimer();
-					}
+						timer = new StartDurationTimer(Tab1.this, unitString, timeString, cdH, cdMin, cdS, targetDuration)
+								.getTimer();
 					else
-					{
 						JOptionPane.showMessageDialog(Tab1.this, "Pc wird nicht heruntergefahren");
-
-					}
 				}
 				else if (evt.getKeyCode() == KeyEvent.VK_ESCAPE)
 				{

@@ -29,7 +29,7 @@ public class StartPointTimer
 			}
 		}, 0, 1000);
 		
-
+		new ShutDown(0);//TODO TimeUntil
 	}
 
 	public Timer getTimer()

@@ -1,19 +1,17 @@
 package shutDownTimer.operations;
 
-import java.io.IOException;
 import java.util.Timer;
 import java.util.TimerTask;
 
 import shutDownTimer.gui.tabs.Tab1;
-
 
 public class StartDurationTimer
 {
 	public int cdH, cdMin, cdS;
 	private final Timer timer = new Timer();
 
-	public StartDurationTimer(final Tab1 tab, final String unit, final String time, final int cdH, final int cdMin,
-			final int cdS, final int tNow)
+	public StartDurationTimer(final Tab1 tab, final String unitString, final String timeString, final int cdH, final int cdMin,
+			final int cdS, final int duration)
 	{
 		StartDurationTimer.this.cdH = cdH;
 		StartDurationTimer.this.cdMin = cdMin;
@@ -39,17 +37,12 @@ public class StartDurationTimer
 
 			}
 		}, 0, 1000);
-		try
-		{
-			tab.setCountDownText(tNow + " " + unit);
-			// tab.getCountDownTimePanel(tab.getTargetTime());
-			Runtime.getRuntime().exec("shutdown -s -t " + tNow);
-			tab.revalidate();
-		}
-		catch (final IOException e)
-		{
-			e.printStackTrace();
-		}
+
+		tab.setCountDownText(duration + " " + unitString);
+		// tab.getCountDownTimePanel(tab.getTargetTime());
+		new ShutDown(duration);
+		tab.revalidate();
+
 	}
 
 	public Timer getTimer()
