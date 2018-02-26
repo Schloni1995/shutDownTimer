@@ -1,12 +1,12 @@
 package shutDownTimer.operations;
 
-import java.io.IOException;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import shutDownTimer.tabs.Tab2;
+import shutDownTimer.gui.tabs.Tab2;
+
 
 public class StartPointTimer
 {
@@ -28,15 +28,7 @@ public class StartPointTimer
 				}
 			}
 		}, 0, 1000);
-		try
-		{
-			int tNow = 0;
-			Runtime.getRuntime().exec("shutdown -s -t " + tNow);
-		}
-		catch (final IOException e)
-		{
-			e.printStackTrace();
-		}
+		
 
 	}
 

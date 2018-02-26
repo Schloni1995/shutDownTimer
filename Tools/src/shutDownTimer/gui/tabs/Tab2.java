@@ -1,4 +1,4 @@
-package shutDownTimer.tabs;
+package shutDownTimer.gui.tabs;
 
 import java.awt.BorderLayout;
 import java.awt.event.KeyAdapter;

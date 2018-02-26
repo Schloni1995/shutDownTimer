@@ -4,7 +4,8 @@ import java.io.IOException;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import shutDownTimer.tabs.Tab1;
+import shutDownTimer.gui.tabs.Tab1;
+
 
 public class StartDurationTimer
 {
