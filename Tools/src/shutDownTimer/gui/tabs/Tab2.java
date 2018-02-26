@@ -6,6 +6,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.text.DecimalFormat;
 import java.util.Vector;
+import java.util.logging.Logger;
 
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -14,6 +15,7 @@ import javax.swing.JPanel;
 public class Tab2 extends JPanel
 {
 	private static final long serialVersionUID = 6235627806339949540L;
+	private static final Logger log = Logger.getLogger(Tab2.class.getName());
 	private JPanel inputPanel;
 	private JPanel contentMidPanel;
 	private JComboBox<String> hBox, minBox, sBox;
@@ -28,6 +30,12 @@ public class Tab2 extends JPanel
 		setLayout(new BorderLayout());
 		add(getInputPanel(), BorderLayout.NORTH);
 		add(getMidContent(), BorderLayout.CENTER);
+	}
+
+	private JComboBox<String> getHInputBox()
+	{
+		if (hBox == null) hBox = new JComboBox<>(h);
+		return hBox;
 	}
 
 	private JPanel getInputPanel()
@@ -45,20 +53,31 @@ public class Tab2 extends JPanel
 		return inputPanel;
 	}
 
+	private KeyListener getKL()
+	{
+		KeyListener kl = new KeyAdapter()
+		{
+			@Override
+			public void keyReleased(KeyEvent ke)
+			{
+				if (ke.getKeyCode() == KeyEvent.VK_ENTER)
+				{
+					// TODO DO STUFF
+
+				}
+			}
+		};
+		return kl;
+	}
+
 	private JPanel getMidContent()
 	{
-		if (contentMidPanel == null) 
+		if (contentMidPanel == null)
 		{
 			contentMidPanel = new JPanel();
 			contentMidPanel.setOpaque(false);
 		}
 		return contentMidPanel;
-	}
-
-	private JComboBox<String> getHInputBox()
-	{
-		if (hBox == null) hBox = new JComboBox<>(h);
-		return hBox;
 	}
 
 	private JComboBox<String> getMinInputBox()
@@ -74,23 +93,6 @@ public class Tab2 extends JPanel
 		return sBox;
 	}
 
-	private KeyListener getKL()
-	{
-		KeyListener kl = new KeyAdapter()
-		{
-			@Override
-			public void keyReleased(KeyEvent ke)
-			{
-				if (ke.getKeyCode() == KeyEvent.VK_ENTER)
-				{
-					//DO STUFF
-					
-				}
-			}
-		};
-		return kl;
-	}
-
 	private void initArray()
 	{
 		h = new Vector<>();
@@ -98,19 +100,13 @@ public class Tab2 extends JPanel
 		s = new Vector<>();
 		DecimalFormat df = new DecimalFormat("00");
 		for (int i = 0; i < 24; i++)
-		{	
 			h.add(df.format(i));
-		}
 
 		for (int i = 0; i < 60; i++)
-		{
 			min.add(df.format(i));
-		}
 
 		for (int i = 0; i < 60; i++)
-		{
 			s.add(df.format(i));
-		}
 
 	}
 

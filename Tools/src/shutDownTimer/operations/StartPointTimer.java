@@ -1,35 +1,37 @@
 package shutDownTimer.operations;
 
-import java.util.Calendar;
-import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.logging.Logger;
 
 import shutDownTimer.gui.tabs.Tab2;
 
-
 public class StartPointTimer
 {
+	private static final Logger log = Logger.getLogger(StartPointTimer.class.getName());
 	public int cdH, cdMin, cdS;
-	private final Timer timer = new Timer();
+	private Timer timer;
 
-	public StartPointTimer(final Tab2 tab, final Date time)
+	public StartPointTimer(final Tab2 tab)
 	{
-		Calendar cal = Calendar.getInstance();
-		timer.schedule(new TimerTask()
+		timer = new Timer();
+		timer.schedule(getTask(), 0, 1000);
+
+		// new ShutDown(0);
+	}
+
+	private TimerTask getTask()
+	{
+		TimerTask tt = new TimerTask()
 		{
 			@Override
 			public void run()
 			{
-				//TODO ShowTimeDiff
-				if (time == cal.getTime())
-				{
-					this.cancel();
-				}
+				// TODO ShowTimeDiff
+				// TODO if (time == cal.getTime()) timer.cancel();
 			}
-		}, 0, 1000);
-		
-		new ShutDown(0);//TODO TimeUntil
+		};
+		return tt;
 	}
 
 	public Timer getTimer()

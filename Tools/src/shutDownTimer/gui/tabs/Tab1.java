@@ -138,22 +138,20 @@ public class Tab1 extends JPanel
 					if (response == JOptionPane.YES_OPTION)
 					{
 						log.fine(cdH + " " + cdMin + " " + cdS);
-						timer = new StartDurationTimer(Tab1.this, unitString,timeString, cdH, cdMin, cdS, durationInSec).getTimer();
+						timer = new StartDurationTimer(Tab1.this, unitString, timeString, cdH, cdMin, cdS,
+								durationInSec).getTimer();
 					}
 					else
 						JOptionPane.showMessageDialog(Tab1.this, "Pc wird nicht heruntergefahren");
 				}
-				else if (evt.getKeyCode() == KeyEvent.VK_ESCAPE)
+				else if (evt.getKeyCode() == KeyEvent.VK_ESCAPE) if (timer != null)
 				{
-					if (timer != null)
-					{
-						getCountDownPanel("", "");
-						new StopTimer(timer);
-						JOptionPane.showMessageDialog(Tab1.this, "Herunterfahren wurde abgebrochen");
-					}
-					else
-						JOptionPane.showMessageDialog(Tab1.this, "Timer nicht vorhanden");
+					getCountDownPanel("", "");
+					new StopTimer(timer);
+					JOptionPane.showMessageDialog(Tab1.this, "Herunterfahren wurde abgebrochen");
 				}
+				else
+					JOptionPane.showMessageDialog(Tab1.this, "Timer nicht vorhanden");
 			}
 		};
 		return ka;
