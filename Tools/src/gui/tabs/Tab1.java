@@ -1,4 +1,4 @@
-package shutDownTimer.gui.tabs;
+package gui.tabs;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -16,8 +16,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import shutDownTimer.operations.StartDurationTimer;
-import shutDownTimer.operations.StopTimer;
+import operations.StartDurationTimer;
+import operations.StopTimer;
 
 public class Tab1 extends JPanel
 {
@@ -29,7 +29,6 @@ public class Tab1 extends JPanel
 
 	private JPanel contentMidPanel;
 	private JLabel countDownLabel;
-	private JPanel countDownPanel;
 	private JLabel einheitTextLabel;
 	private JPanel inputPanel;
 	private KeyAdapter ka;
@@ -61,17 +60,6 @@ public class Tab1 extends JPanel
 	{
 		if (countDownLabel == null) countDownLabel = new JLabel("Restzeit: ");
 		return countDownLabel;
-	}
-
-	public JPanel getCountDownPanel(final String time, final String unit)
-	{
-		if (countDownPanel == null)
-		{
-			countDownPanel = new JPanel();
-			countDownPanel.setOpaque(false);
-		}
-		countDownPanel.add(getCountDownLabel());
-		return countDownPanel;
 	}
 
 	public JLabel getEinheitTextLabel()
@@ -146,7 +134,6 @@ public class Tab1 extends JPanel
 				}
 				else if (evt.getKeyCode() == KeyEvent.VK_ESCAPE) if (timer != null)
 				{
-					getCountDownPanel("", "");
 					new StopTimer(timer);
 					JOptionPane.showMessageDialog(Tab1.this, "Herunterfahren wurde abgebrochen");
 				}
@@ -159,9 +146,13 @@ public class Tab1 extends JPanel
 
 	public JPanel getMidContent()
 	{
-		contentMidPanel = new JPanel();
-		contentMidPanel.setOpaque(false);
-		contentMidPanel.add(getCountDownPanel("", ""));
+		if (contentMidPanel == null)
+		{
+			contentMidPanel = new JPanel();
+			contentMidPanel.setOpaque(false);
+			contentMidPanel.add(getCountDownLabel());
+		}
+
 		return contentMidPanel;
 	}
 
@@ -188,6 +179,11 @@ public class Tab1 extends JPanel
 		return timeField;
 	}
 
+	public void setCountDownText(final String timeLeft)
+	{
+		countDownLabel.setText(timeLeft);
+	}
+
 	// public String getTargetTime()
 	// {
 	// final SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
@@ -196,9 +192,4 @@ public class Tab1 extends JPanel
 	// System.out.println(now);
 	// return now;
 	// }
-
-	public void setCountDownText(final String timeLeft)
-	{
-		countDownLabel.setText(timeLeft);
-	}
 }

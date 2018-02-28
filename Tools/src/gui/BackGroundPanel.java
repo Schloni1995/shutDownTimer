@@ -1,4 +1,4 @@
-package shutDownTimer.gui;
+package gui;
 
 import java.awt.Graphics;
 import java.awt.Image;

@@ -1,16 +1,18 @@
-package shutDownTimer.operations;
+package operations;
 
 import java.time.LocalDateTime;
 import java.util.Timer;
-import java.util.TimerTask;
 import java.util.logging.Logger;
 
-import shutDownTimer.gui.tabs.Tab2;
+import gui.tabs.Tab2;
+import timertasks.ShutDownTask;
 
 public class StartPointTimer
 {
+	private final static LocalDateTime LDT_NOW = LocalDateTime.now();
 	private static final Logger LOG = Logger.getLogger(StartPointTimer.class.getName());
 	public int cdH, cdMin, cdS;
+	private final TimeDiff timeDiff;
 	private final Timer timer;
 
 	/** Kontruktor für den Zeitpunkt des Herunterfahrens
@@ -22,27 +24,16 @@ public class StartPointTimer
 	{
 		StartPointTimer.LOG.fine("Timer gestartet");
 		timer = new Timer();
-		timer.schedule(getTask(), 0, 1000);
+		timeDiff = new TimeDiff(targetTime, StartPointTimer.LDT_NOW);
+
+		cdH = timeDiff.getCdH();
+		cdMin = timeDiff.getCdMin();
+		cdS = timeDiff.getCdS();
+
+		timer.schedule(new ShutDownTask(cdH, cdMin, cdS, tab), 0, 1000);
 
 		StartPointTimer.LOG.finer("Rechner fährt herunter");
 		// new ShutDown(0);
-	}
-
-	/** Gibt die Aufgabe des Timers zurück
-	 *
-	 * @return TimerTask tt */
-	public TimerTask getTask()
-	{
-		final TimerTask tt = new TimerTask()
-		{
-			@Override
-			public void run()
-			{
-				// TODO ShowTimeDiff
-				// TODO if (time == cal.getTime()) timer.cancel();
-			}
-		};
-		return tt;
 	}
 
 	/** Gibt den Timer zurück

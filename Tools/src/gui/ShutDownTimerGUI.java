@@ -1,12 +1,12 @@
-package shutDownTimer.gui;
+package gui;
 
 import java.util.logging.Logger;
 
 import javax.swing.JFrame;
 import javax.swing.JTabbedPane;
 
-import shutDownTimer.gui.tabs.Tab1;
-import shutDownTimer.gui.tabs.Tab2;
+import gui.tabs.Tab1;
+import gui.tabs.Tab2;
 
 public class ShutDownTimerGUI extends JFrame
 {

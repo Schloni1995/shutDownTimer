@@ -1,4 +1,4 @@
-package shutDownTimer.operations;
+package operations;
 
 import java.io.IOException;
 import java.util.Timer;

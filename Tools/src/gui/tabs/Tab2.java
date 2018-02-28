@@ -1,4 +1,4 @@
-package shutDownTimer.gui.tabs;
+package gui.tabs;
 
 import java.awt.BorderLayout;
 import java.awt.event.KeyAdapter;
@@ -14,7 +14,7 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import shutDownTimer.operations.StartPointTimer;
+import operations.StartPointTimer;
 
 public class Tab2 extends JPanel
 {
@@ -22,6 +22,7 @@ public class Tab2 extends JPanel
 	/** Tab2 Zeitpunkt */
 	private static final long serialVersionUID = 1347L;
 	private JPanel contentMidPanel;
+	private JLabel countDownLabel;
 	private Vector<String> h, min, s;
 	private JComboBox<String> hBox, minBox, sBox;
 	private JPanel inputPanel;
@@ -35,6 +36,12 @@ public class Tab2 extends JPanel
 		setLayout(new BorderLayout());
 		add(getInputPanel(), BorderLayout.NORTH);
 		add(getMidContent(), BorderLayout.CENTER);
+	}
+
+	public JLabel getCountDownLabel()
+	{
+		if (countDownLabel == null) countDownLabel = new JLabel("Restzeit: ");
+		return countDownLabel;
 	}
 
 	private JComboBox<String> getHInputBox()
@@ -91,6 +98,7 @@ public class Tab2 extends JPanel
 		if (contentMidPanel == null)
 		{
 			contentMidPanel = new JPanel();
+			contentMidPanel.add(getCountDownLabel());
 			contentMidPanel.setOpaque(false);
 		}
 		return contentMidPanel;
@@ -124,6 +132,11 @@ public class Tab2 extends JPanel
 		for (int i = 0; i < 60; i++)
 			s.add(df.format(i));
 
+	}
+
+	public void setCountDownText(final String timeLeft)
+	{
+		countDownLabel.setText(timeLeft);
 	}
 
 }

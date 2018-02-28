@@ -1,6 +1,6 @@
-package shutDownTimer.start;
+package start;
 
-import shutDownTimer.gui.ShutDownTimerGUI;
+import gui.ShutDownTimerGUI;
 
 public class Starter
 {
