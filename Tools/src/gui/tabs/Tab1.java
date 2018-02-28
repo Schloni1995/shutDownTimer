@@ -100,12 +100,12 @@ public class Tab1 extends JPanel
 					float cdS = conv.getCdS();
 					float durationInSec = conv.getDurationInSec();
 					
+					LOG.fine(cdH + " " + cdMin + " " + cdS);
 					final String msg = "Soll der Rechner in " + timeString + " " + unitString + " herunterfahren?";
 					final int response = JOptionPane.showConfirmDialog(null, msg, "Sicher?", JOptionPane.YES_NO_OPTION);
 					
 					if (response == JOptionPane.YES_OPTION)
 					{
-						LOG.fine(cdH + " " + cdMin + " " + cdS);
 						timer = new StartDurationTimer(Tab1.this, unitString, timeString, cdH, cdMin, cdS,
 								durationInSec).getTimer();
 					}

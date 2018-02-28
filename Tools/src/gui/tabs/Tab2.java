@@ -34,6 +34,7 @@ public class Tab2 extends JPanel
 	 * Zeitpunktbestimmung */
 	public Tab2()
 	{
+		LOG.info("Tab2 wird geladen");
 		initArray();
 		setOpaque(false);
 		setLayout(new BorderLayout());
@@ -45,12 +46,6 @@ public class Tab2 extends JPanel
 	{
 		if (countDownLabel == null) countDownLabel = new JLabel("Restzeit: ");
 		return countDownLabel;
-	}
-
-	private JComboBox<String> getHInputBox()
-	{
-		if (hBox == null) hBox = new JComboBox<>(h);
-		return hBox;
 	}
 
 	private JPanel getInputPanel()
@@ -79,12 +74,17 @@ public class Tab2 extends JPanel
 			{
 				if (ke.getKeyCode() == KeyEvent.VK_ENTER)
 				{
+					LOG.info("Now: "+LocalDateTime.now().toString());
+					LOG.info("Now+1h: "+LocalDateTime.now().plusHours(Long.parseLong(hBox.getSelectedItem().toString())).toString());
+					
 					LocalDateTime ldt = null;
 					try
 					{
 						ldt = LocalDateTime.now().plusHours(Long.parseLong(hBox.getSelectedItem().toString()))
 								.plusMinutes(Long.parseLong(minBox.getSelectedItem().toString()))
 								.plusSeconds(Long.parseLong(sBox.getSelectedItem().toString()));
+						
+						LOG.info(ldt.toString());
 					}
 					catch (final DateTimeException e)
 					{
@@ -94,11 +94,11 @@ public class Tab2 extends JPanel
 					final int h = ldt.getHour();
 					final int m = ldt.getMinute();
 					final int s = ldt.getSecond();
+					LOG.fine("Uhrzeit: " + h + ":" + m + ":" + s);
 					final String msg = "Soll der Rechner " + h + ":" + m + ":" + s + " Uhr heruntergefahren werden?";
 					final int response = JOptionPane.showConfirmDialog(null, msg, "Sicher?", JOptionPane.YES_NO_OPTION);
 					if (response == JOptionPane.YES_OPTION)
 					{
-						LOG.fine("Uhrzeit: " + h + ":" + m + ":" + s);
 						timer = new StartPointTimer(Tab2.this, ldt).getTimer();
 					}
 					else
@@ -127,16 +127,33 @@ public class Tab2 extends JPanel
 		return contentMidPanel;
 	}
 
+	private JComboBox<String> getHInputBox()
+	{
+		if (hBox == null)
+		{
+			hBox = new JComboBox<>(h);
+			hBox.addKeyListener(getKA());
+		}
+		return hBox;
+	}
+
 	private JComboBox<String> getMinInputBox()
 	{
-		if (minBox == null) minBox = new JComboBox<>(min);
+		if (minBox == null)
+		{
+			minBox = new JComboBox<>(min);
+			minBox.addKeyListener(getKA());
+		}
 		return minBox;
 	}
 
 	private JComboBox<String> getSInputBox()
 	{
-		if (sBox == null) sBox = new JComboBox<>(s);
-		sBox.addKeyListener(getKA());
+		if (sBox == null)
+		{
+			sBox = new JComboBox<>(s);
+			sBox.addKeyListener(getKA());
+		}
 		return sBox;
 	}
 
