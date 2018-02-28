@@ -7,14 +7,17 @@ import java.awt.event.KeyListener;
 import java.text.DecimalFormat;
 import java.time.DateTimeException;
 import java.time.LocalDateTime;
+import java.util.Timer;
 import java.util.Vector;
 import java.util.logging.Logger;
 
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import operations.StartPointTimer;
+import operations.StopTimer;
 
 public class Tab2 extends JPanel
 {
@@ -69,6 +72,7 @@ public class Tab2 extends JPanel
 	{
 		final KeyListener kl = new KeyAdapter()
 		{
+			private Timer timer;
 			@Override
 			public void keyReleased(final KeyEvent ke)
 			{
@@ -86,8 +90,25 @@ public class Tab2 extends JPanel
 						Tab2.LOG.severe(e.getMessage());
 						System.exit(0);
 					}
-					new StartPointTimer(Tab2.this, ldt);
+
+					final String msg = "Soll der Rechner " + ldt.getHour() + ":" + ldt.getMinute() + ":"
+							+ ldt.getSecond() + " Uhr heruntergefahren werden?";
+					final int response = JOptionPane.showConfirmDialog(null, msg, "Sicher?", JOptionPane.YES_NO_OPTION);
+					if (response == JOptionPane.YES_OPTION)
+					{
+						LOG.fine("Uhrzeit: " + ldt.getHour() + ":" + ldt.getMinute() + ":" + ldt.getSecond());
+						timer = new StartPointTimer(Tab2.this, ldt).getTimer();
+					}
+					else
+						JOptionPane.showMessageDialog(Tab2.this, "Pc wird nicht heruntergefahren");
 				}
+				else if (ke.getKeyCode() == KeyEvent.VK_ESCAPE) if (timer != null)
+				{
+					new StopTimer(timer);
+					JOptionPane.showMessageDialog(Tab2.this, "Herunterfahren wurde abgebrochen");
+				}
+				else
+					JOptionPane.showMessageDialog(Tab2.this, "Timer nicht vorhanden");
 			}
 		};
 		return kl;

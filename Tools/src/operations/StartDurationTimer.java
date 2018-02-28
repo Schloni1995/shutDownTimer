@@ -4,7 +4,7 @@ import java.util.Timer;
 import java.util.logging.Logger;
 
 import gui.tabs.Tab1;
-import timertasks.ShutDownTask;
+import timertask.ShutDownTask;
 
 public class StartDurationTimer
 {
@@ -15,7 +15,7 @@ public class StartDurationTimer
 	public StartDurationTimer(final Tab1 tab, final String unitString, final String timeString, final int cdH,
 			final int cdMin, final int cdS, final int durationInSec)
 	{
-		StartDurationTimer.LOG.finer(cdH + " " + cdMin + " " + cdS);
+		LOG.finer(cdH + " " + cdMin + " " + cdS);
 		timer = new Timer();
 		timer.schedule(new ShutDownTask(cdH, cdMin, cdS, tab), 0, 1000);
 		new ShutDown(durationInSec);

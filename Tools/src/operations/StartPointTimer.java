@@ -5,7 +5,7 @@ import java.util.Timer;
 import java.util.logging.Logger;
 
 import gui.tabs.Tab2;
-import timertasks.ShutDownTask;
+import timertask.ShutDownTask;
 
 public class StartPointTimer
 {
@@ -29,6 +29,7 @@ public class StartPointTimer
 		cdH = timeDiff.getCdH();
 		cdMin = timeDiff.getCdMin();
 		cdS = timeDiff.getCdS();
+		
 
 		timer.schedule(new ShutDownTask(cdH, cdMin, cdS, tab), 0, 1000);
 

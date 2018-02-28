@@ -16,6 +16,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import operations.Converter;
 import operations.StartDurationTimer;
 import operations.StopTimer;
 
@@ -93,39 +94,18 @@ public class Tab1 extends JPanel
 
 				if (evt.getKeyCode() == KeyEvent.VK_ENTER)
 				{
-					int cdH = 0, cdMin = 0, cdS = 0;
-					int durationInSec = Integer.parseInt(timeString);
-
-					switch (unitString)
-					{
-						case "Stunden":
-							cdH = durationInSec;
-							cdMin = 0;
-							cdS = 0;
-							durationInSec *= 3600;
-							break;
-						case "Minuten":
-							cdH = durationInSec / 60;
-							cdMin = durationInSec % 60;
-							cdS = 0;
-							durationInSec *= 60;
-							break;
-						case "Sekunden":
-							cdH = durationInSec / 3600;
-							cdMin = durationInSec / 60;
-							cdS = durationInSec % 60;
-							break;
-						default:
-							cdH = 0;
-							cdMin = 0;
-							cdS = 0;
-							break;
-					}
+					Converter conv = new Converter(unitString,Integer.parseInt(timeString));
+					int cdH = conv.getCdH();
+					int cdMin = conv.getCdMin();
+					int cdS = conv.getCdS();
+					int durationInSec = conv.getDurationInSec();
+					
 					final String msg = "Soll der Rechner in " + timeString + " " + unitString + " herunterfahren?";
 					final int response = JOptionPane.showConfirmDialog(null, msg, "Sicher?", JOptionPane.YES_NO_OPTION);
+					
 					if (response == JOptionPane.YES_OPTION)
 					{
-						Tab1.LOG.fine(cdH + " " + cdMin + " " + cdS);
+						LOG.fine(cdH + " " + cdMin + " " + cdS);
 						timer = new StartDurationTimer(Tab1.this, unitString, timeString, cdH, cdMin, cdS,
 								durationInSec).getTimer();
 					}

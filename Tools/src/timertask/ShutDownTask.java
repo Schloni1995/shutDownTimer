@@ -1,7 +1,7 @@
 /**
  *
  */
-package timertasks;
+package timertask;
 
 import java.util.TimerTask;
 import java.util.logging.Logger;
