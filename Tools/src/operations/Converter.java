@@ -2,10 +2,10 @@ package operations;
 
 public class Converter
 {
-	private int cdH , cdMin , cdS;
-	private int durInS;
+	private float cdH , cdMin , cdS;
+	private float durInS;
 	
-	public Converter(String unit, int durationInSec)
+	public Converter(String unit, float durationInSec)
 	{		
 		this.durInS = durationInSec;
 		switch (unit)
@@ -38,7 +38,7 @@ public class Converter
 	/**
 	 * @return the cdH
 	 */
-	public int getCdH()
+	public float getCdH()
 	{
 		return cdH;
 	}
@@ -46,7 +46,7 @@ public class Converter
 	/**
 	 * @return the cdMin
 	 */
-	public int getCdMin()
+	public float getCdMin()
 	{
 		return cdMin;
 	}
@@ -54,7 +54,7 @@ public class Converter
 	/**
 	 * @return the cdS
 	 */
-	public int getCdS()
+	public float getCdS()
 	{
 		return cdS;
 	}
@@ -62,7 +62,7 @@ public class Converter
 	/**
 	 * @return the durInS
 	 */
-	public int getDurationInSec()
+	public float getDurationInSec()
 	{
 		return durInS;
 	}

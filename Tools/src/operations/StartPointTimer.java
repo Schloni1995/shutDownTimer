@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.Timer;
 import java.util.logging.Logger;
 
+import constants.Messages;
 import gui.tabs.Tab2;
 import timertask.ShutDownTask;
 
@@ -22,19 +23,15 @@ public class StartPointTimer
 	 */
 	public StartPointTimer(final Tab2 tab, final LocalDateTime targetTime)
 	{
-		StartPointTimer.LOG.fine("Timer gestartet");
+		LOG.fine(Messages.TIMER_START_MESSAGE);
 		timer = new Timer();
 		timeDiff = new TimeDiff(targetTime, StartPointTimer.LDT_NOW);
-
 		cdH = timeDiff.getCdH();
 		cdMin = timeDiff.getCdMin();
 		cdS = timeDiff.getCdS();
-		
-
 		timer.schedule(new ShutDownTask(cdH, cdMin, cdS, tab), 0, 1000);
-
-		StartPointTimer.LOG.finer("Rechner fährt herunter");
-		// new ShutDown(0);
+		
+		new ShutDown(new Converter("", cdH * 3600 + cdMin*60 + cdS).getDurationInSec());
 	}
 
 	/** Gibt den Timer zurück

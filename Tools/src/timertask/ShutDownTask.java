@@ -13,9 +13,9 @@ import gui.tabs.Tab2;
 public class ShutDownTask extends TimerTask
 {
 	private static final Logger LOG = Logger.getLogger(ShutDownTask.class.getName());
-	private int h;
-	private int m;
-	private int s;
+	private float h;
+	private float m;
+	private float s;
 	private Tab1 tab1;
 	private Tab2 tab2;
 
@@ -26,7 +26,7 @@ public class ShutDownTask extends TimerTask
 	 * @param cdS
 	 * @param tab1
 	 */
-	public ShutDownTask(final int cdH, final int cdMin, final int cdS, final Tab1 tab1)
+	public ShutDownTask(final float cdH, final float cdMin, final float cdS, final Tab1 tab1)
 	{
 		this.tab1 = tab1;
 		h = cdH;
@@ -41,7 +41,7 @@ public class ShutDownTask extends TimerTask
 	 * @param cdS
 	 * @param tab2
 	 */
-	public ShutDownTask(final int cdH, final int cdMin, final int cdS, final Tab2 tab2)
+	public ShutDownTask(final float cdH, final float cdMin, final float cdS, final Tab2 tab2)
 	{
 		this.tab2 = tab2;
 		h = cdH;
@@ -52,7 +52,7 @@ public class ShutDownTask extends TimerTask
 	@Override
 	public void run()
 	{
-		ShutDownTask.LOG.info(h + " " + m + " " + " " + s);
+		LOG.info(h + " " + m + " " + " " + s);
 
 		if (tab1 != null) tab1.setCountDownText(h + " Stunden " + m + " Minuten " + s + " Sekunden");
 		else if (tab2 != null) tab2.setCountDownText(h + " Stunden " + m + " Minuten " + s + " Sekunden");

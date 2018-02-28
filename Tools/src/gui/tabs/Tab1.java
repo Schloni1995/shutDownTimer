@@ -16,6 +16,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import constants.Messages;
 import operations.Converter;
 import operations.StartDurationTimer;
 import operations.StopTimer;
@@ -32,7 +33,6 @@ public class Tab1 extends JPanel
 	private JLabel countDownLabel;
 	private JLabel einheitTextLabel;
 	private JPanel inputPanel;
-	private KeyAdapter ka;
 	private JTextField timeField;
 	private JComboBox<String> unitBox;
 
@@ -82,7 +82,7 @@ public class Tab1 extends JPanel
 
 	public KeyAdapter getKeyAdapter()
 	{
-		ka = new KeyAdapter()
+		KeyAdapter ka = new KeyAdapter()
 		{
 			private Timer timer;
 
@@ -95,10 +95,10 @@ public class Tab1 extends JPanel
 				if (evt.getKeyCode() == KeyEvent.VK_ENTER)
 				{
 					Converter conv = new Converter(unitString,Integer.parseInt(timeString));
-					int cdH = conv.getCdH();
-					int cdMin = conv.getCdMin();
-					int cdS = conv.getCdS();
-					int durationInSec = conv.getDurationInSec();
+					float cdH = conv.getCdH();
+					float cdMin = conv.getCdMin();
+					float cdS = conv.getCdS();
+					float durationInSec = conv.getDurationInSec();
 					
 					final String msg = "Soll der Rechner in " + timeString + " " + unitString + " herunterfahren?";
 					final int response = JOptionPane.showConfirmDialog(null, msg, "Sicher?", JOptionPane.YES_NO_OPTION);
@@ -110,15 +110,15 @@ public class Tab1 extends JPanel
 								durationInSec).getTimer();
 					}
 					else
-						JOptionPane.showMessageDialog(Tab1.this, "Pc wird nicht heruntergefahren");
+						JOptionPane.showMessageDialog(Tab1.this, Messages.NOT_SHUTDOWN_MESSAGE);
 				}
 				else if (evt.getKeyCode() == KeyEvent.VK_ESCAPE) if (timer != null)
 				{
 					new StopTimer(timer);
-					JOptionPane.showMessageDialog(Tab1.this, "Herunterfahren wurde abgebrochen");
+					JOptionPane.showMessageDialog(Tab1.this, Messages.ESCAPE_MESSAGE);
 				}
 				else
-					JOptionPane.showMessageDialog(Tab1.this, "Timer nicht vorhanden");
+					JOptionPane.showMessageDialog(Tab1.this, Messages.NOT_TIMER_MESSAGE);
 			}
 		};
 		return ka;

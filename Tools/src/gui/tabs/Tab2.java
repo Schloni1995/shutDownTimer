@@ -3,7 +3,6 @@ package gui.tabs;
 import java.awt.BorderLayout;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.text.DecimalFormat;
 import java.time.DateTimeException;
 import java.time.LocalDateTime;
@@ -16,6 +15,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import constants.Messages;
 import operations.StartPointTimer;
 import operations.StopTimer;
 
@@ -68,11 +68,12 @@ public class Tab2 extends JPanel
 		return inputPanel;
 	}
 
-	private KeyListener getKL()
+	private KeyAdapter getKA()
 	{
-		final KeyListener kl = new KeyAdapter()
+		final KeyAdapter ka = new KeyAdapter()
 		{
 			private Timer timer;
+
 			@Override
 			public void keyReleased(final KeyEvent ke)
 			{
@@ -87,31 +88,32 @@ public class Tab2 extends JPanel
 					}
 					catch (final DateTimeException e)
 					{
-						Tab2.LOG.severe(e.getMessage());
+						LOG.severe(e.getMessage());
 						System.exit(0);
 					}
-
-					final String msg = "Soll der Rechner " + ldt.getHour() + ":" + ldt.getMinute() + ":"
-							+ ldt.getSecond() + " Uhr heruntergefahren werden?";
+					final int h = ldt.getHour();
+					final int m = ldt.getMinute();
+					final int s = ldt.getSecond();
+					final String msg = "Soll der Rechner " + h + ":" + m + ":" + s + " Uhr heruntergefahren werden?";
 					final int response = JOptionPane.showConfirmDialog(null, msg, "Sicher?", JOptionPane.YES_NO_OPTION);
 					if (response == JOptionPane.YES_OPTION)
 					{
-						LOG.fine("Uhrzeit: " + ldt.getHour() + ":" + ldt.getMinute() + ":" + ldt.getSecond());
+						LOG.fine("Uhrzeit: " + h + ":" + m + ":" + s);
 						timer = new StartPointTimer(Tab2.this, ldt).getTimer();
 					}
 					else
-						JOptionPane.showMessageDialog(Tab2.this, "Pc wird nicht heruntergefahren");
+						JOptionPane.showMessageDialog(Tab2.this, Messages.NOT_SHUTDOWN_MESSAGE);
 				}
 				else if (ke.getKeyCode() == KeyEvent.VK_ESCAPE) if (timer != null)
 				{
 					new StopTimer(timer);
-					JOptionPane.showMessageDialog(Tab2.this, "Herunterfahren wurde abgebrochen");
+					JOptionPane.showMessageDialog(Tab2.this, Messages.ESCAPE_MESSAGE);
 				}
 				else
-					JOptionPane.showMessageDialog(Tab2.this, "Timer nicht vorhanden");
+					JOptionPane.showMessageDialog(Tab2.this, Messages.NOT_TIMER_MESSAGE);
 			}
 		};
-		return kl;
+		return ka;
 	}
 
 	private JPanel getMidContent()
@@ -134,7 +136,7 @@ public class Tab2 extends JPanel
 	private JComboBox<String> getSInputBox()
 	{
 		if (sBox == null) sBox = new JComboBox<>(s);
-		sBox.addKeyListener(getKL());
+		sBox.addKeyListener(getKA());
 		return sBox;
 	}
 
