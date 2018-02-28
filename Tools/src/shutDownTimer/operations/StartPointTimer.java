@@ -1,5 +1,6 @@
 package shutDownTimer.operations;
 
+import java.time.LocalDateTime;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.logging.Logger;
@@ -8,19 +9,30 @@ import shutDownTimer.gui.tabs.Tab2;
 
 public class StartPointTimer
 {
-	private static final Logger log = Logger.getLogger(StartPointTimer.class.getName());
+	private static final Logger LOG = Logger.getLogger(StartPointTimer.class.getName());
 	public int cdH, cdMin, cdS;
 	private Timer timer;
 
-	public StartPointTimer(final Tab2 tab)
+	/**
+	 * Kontruktor für den Zeitpunkt des Herunterfahrens
+	 * @param tab
+	 * @param targetTime
+	 */
+	public StartPointTimer(final Tab2 tab, LocalDateTime targetTime)
 	{
+		LOG.fine("Timer gestartet");
 		timer = new Timer();
 		timer.schedule(getTask(), 0, 1000);
 
+		LOG.finer("Rechner fährt herunter");
 		// new ShutDown(0);
 	}
 
-	private TimerTask getTask()
+	/**
+	 * Gibt die Aufgabe des Timers zurück
+	 * @return TimerTask tt
+	 */
+	public TimerTask getTask()
 	{
 		TimerTask tt = new TimerTask()
 		{
@@ -34,6 +46,10 @@ public class StartPointTimer
 		return tt;
 	}
 
+	/**
+	 * Gibt den Timer zurück
+	 * @return Timer timer
+	 */
 	public Timer getTimer()
 	{
 		return timer;

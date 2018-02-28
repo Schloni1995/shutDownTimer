@@ -21,36 +21,32 @@ import shutDownTimer.operations.StopTimer;
 
 public class Tab1 extends JPanel
 {
-	private static final Logger log = Logger.getLogger(Tab1.class.getName());
+	private final static String[] UNITS = new String[] { "Sekunden", "Minuten", "Stunden" };
+	private final static String DEFAULTTEXT= "Bitte gib die gew\u00fcnschte Zeit ein.";
+	private static final Logger LOG = Logger.getLogger(Tab1.class.getName());
 	private static final long serialVersionUID = 1586228218070110746L;
 	private JPanel contentMidPanel;
-	private JLabel countDownLabel;
 	private JPanel countDownPanel;
-	private final String defaultTextString;
-	private JLabel einheitTextLabel;
 	private JPanel inputPanel;
+	private JLabel countDownLabel;
+	private JLabel einheitTextLabel;
 	private KeyAdapter ka;
 	private JTextField timeField;
-	@SuppressWarnings("rawtypes")
-	private JComboBox unitBox;
-	private final String[] units;
-
+	private JComboBox<String> unitBox;
+	
 	public Tab1()
 	{
-		defaultTextString = "Bitte gib die gewünschte Zeit ein.";
-		units = new String[] { "Sekunden", "Minuten", "Stunden" };
-
+		LOG.info("Tab1 wird geladen");
 		setOpaque(false);
 		setLayout(new BorderLayout());
 		add(getInputPanel(), BorderLayout.NORTH);
 		add(getMidContent(), BorderLayout.CENTER);
 	}
 
-	@SuppressWarnings({ "rawtypes", "unchecked" })
-	public JComboBox getCombobox()
+	public JComboBox<String> getCombobox()
 	{
 		unitBox = new JComboBox<>();
-		for (final String unit : units)
+		for (final String unit : UNITS)
 			unitBox.addItem(unit);
 		unitBox.addKeyListener(getKeyAdapter());
 		unitBox.setOpaque(true);
@@ -85,7 +81,7 @@ public class Tab1 extends JPanel
 	{
 		inputPanel = new JPanel();
 		inputPanel.setOpaque(false);
-		inputPanel.add(getTextfield());
+		inputPanel.add(getTimeField());
 		inputPanel.add(getEinheitTextLabel());
 		inputPanel.add(getCombobox());
 		return inputPanel;
@@ -137,7 +133,7 @@ public class Tab1 extends JPanel
 					final int response = JOptionPane.showConfirmDialog(null, msg, "Sicher?", JOptionPane.YES_NO_OPTION);
 					if (response == JOptionPane.YES_OPTION)
 					{
-						log.fine(cdH + " " + cdMin + " " + cdS);
+						LOG.fine(cdH + " " + cdMin + " " + cdS);
 						timer = new StartDurationTimer(Tab1.this, unitString, timeString, cdH, cdMin, cdS,
 								durationInSec).getTimer();
 					}
@@ -165,23 +161,26 @@ public class Tab1 extends JPanel
 		return contentMidPanel;
 	}
 
-	public JTextField getTextfield()
+	public JTextField getTimeField()
 	{
-		timeField = new JTextField(defaultTextString);
-		timeField.setMinimumSize(new Dimension(200, 20));
-		timeField.setMaximumSize(new Dimension(200, 20));
-		timeField.setPreferredSize(new Dimension(200, 20));
-		timeField.selectAll();
-		timeField.addKeyListener(getKeyAdapter());
-		timeField.addFocusListener(new FocusAdapter()
+		if (timeField == null)
 		{
-			@Override
-			public void focusGained(final FocusEvent e)
+			timeField = new JTextField(DEFAULTTEXT);
+			timeField.setMinimumSize(new Dimension(200, 20));
+			timeField.setMaximumSize(new Dimension(200, 20));
+			timeField.setPreferredSize(new Dimension(200, 20));
+			timeField.selectAll();
+			timeField.addKeyListener(getKeyAdapter());
+			timeField.addFocusListener(new FocusAdapter()
 			{
-				timeField.selectAll();
-			}
-		});
-		timeField.setOpaque(true);
+				@Override
+				public void focusGained(final FocusEvent e)
+				{
+					timeField.selectAll();
+				}
+			});
+			timeField.setOpaque(true);
+		}
 		return timeField;
 	}
 

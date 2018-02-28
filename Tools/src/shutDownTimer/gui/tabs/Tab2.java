@@ -5,6 +5,8 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.text.DecimalFormat;
+import java.time.DateTimeException;
+import java.time.LocalDateTime;
 import java.util.Vector;
 import java.util.logging.Logger;
 
@@ -12,20 +14,20 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import shutDownTimer.operations.StartPointTimer;
+
 public class Tab2 extends JPanel
 {
 	private static final long serialVersionUID = 6235627806339949540L;
-	private static final Logger log = Logger.getLogger(Tab2.class.getName());
+	private static final Logger LOG = Logger.getLogger(Tab2.class.getName());
 	private JPanel inputPanel;
 	private JPanel contentMidPanel;
 	private JComboBox<String> hBox, minBox, sBox;
-
 	private Vector<String> h, min, s;
 
 	public Tab2()
 	{
 		initArray();
-
 		setOpaque(false);
 		setLayout(new BorderLayout());
 		add(getInputPanel(), BorderLayout.NORTH);
@@ -62,8 +64,21 @@ public class Tab2 extends JPanel
 			{
 				if (ke.getKeyCode() == KeyEvent.VK_ENTER)
 				{
-					// TODO DO STUFF
-
+					LocalDateTime ldt = null;
+					try
+					{
+						ldt = LocalDateTime.now()
+								.plusHours(Long.parseLong(hBox.getSelectedItem().toString()))
+								.plusMinutes(Long.parseLong(minBox.getSelectedItem().toString()))
+								.plusSeconds(Long.parseLong(sBox.getSelectedItem().toString())
+										);
+					}
+					catch (DateTimeException e)
+					{
+						LOG.severe(e.getMessage());
+						System.exit(0);
+					}
+					new StartPointTimer(Tab2.this,ldt);
 				}
 			}
 		};
