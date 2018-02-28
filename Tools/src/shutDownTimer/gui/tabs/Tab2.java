@@ -18,13 +18,16 @@ import shutDownTimer.operations.StartPointTimer;
 
 public class Tab2 extends JPanel
 {
-	private static final long serialVersionUID = 6235627806339949540L;
 	private static final Logger LOG = Logger.getLogger(Tab2.class.getName());
-	private JPanel inputPanel;
+	/** Tab2 Zeitpunkt */
+	private static final long serialVersionUID = 1347L;
 	private JPanel contentMidPanel;
-	private JComboBox<String> hBox, minBox, sBox;
 	private Vector<String> h, min, s;
+	private JComboBox<String> hBox, minBox, sBox;
+	private JPanel inputPanel;
 
+	/** Konstruktor für den zweiten Tab<br>
+	 * Zeitpunktbestimmung */
 	public Tab2()
 	{
 		initArray();
@@ -57,28 +60,26 @@ public class Tab2 extends JPanel
 
 	private KeyListener getKL()
 	{
-		KeyListener kl = new KeyAdapter()
+		final KeyListener kl = new KeyAdapter()
 		{
 			@Override
-			public void keyReleased(KeyEvent ke)
+			public void keyReleased(final KeyEvent ke)
 			{
 				if (ke.getKeyCode() == KeyEvent.VK_ENTER)
 				{
 					LocalDateTime ldt = null;
 					try
 					{
-						ldt = LocalDateTime.now()
-								.plusHours(Long.parseLong(hBox.getSelectedItem().toString()))
+						ldt = LocalDateTime.now().plusHours(Long.parseLong(hBox.getSelectedItem().toString()))
 								.plusMinutes(Long.parseLong(minBox.getSelectedItem().toString()))
-								.plusSeconds(Long.parseLong(sBox.getSelectedItem().toString())
-										);
+								.plusSeconds(Long.parseLong(sBox.getSelectedItem().toString()));
 					}
-					catch (DateTimeException e)
+					catch (final DateTimeException e)
 					{
-						LOG.severe(e.getMessage());
+						Tab2.LOG.severe(e.getMessage());
 						System.exit(0);
 					}
-					new StartPointTimer(Tab2.this,ldt);
+					new StartPointTimer(Tab2.this, ldt);
 				}
 			}
 		};
@@ -113,7 +114,7 @@ public class Tab2 extends JPanel
 		h = new Vector<>();
 		min = new Vector<>();
 		s = new Vector<>();
-		DecimalFormat df = new DecimalFormat("00");
+		final DecimalFormat df = new DecimalFormat("00");
 		for (int i = 0; i < 24; i++)
 			h.add(df.format(i));
 

@@ -11,30 +11,29 @@ public class StartPointTimer
 {
 	private static final Logger LOG = Logger.getLogger(StartPointTimer.class.getName());
 	public int cdH, cdMin, cdS;
-	private Timer timer;
+	private final Timer timer;
 
-	/**
-	 * Kontruktor für den Zeitpunkt des Herunterfahrens
+	/** Kontruktor für den Zeitpunkt des Herunterfahrens
+	 *
 	 * @param tab
 	 * @param targetTime
 	 */
-	public StartPointTimer(final Tab2 tab, LocalDateTime targetTime)
+	public StartPointTimer(final Tab2 tab, final LocalDateTime targetTime)
 	{
-		LOG.fine("Timer gestartet");
+		StartPointTimer.LOG.fine("Timer gestartet");
 		timer = new Timer();
 		timer.schedule(getTask(), 0, 1000);
 
-		LOG.finer("Rechner fährt herunter");
+		StartPointTimer.LOG.finer("Rechner fährt herunter");
 		// new ShutDown(0);
 	}
 
-	/**
-	 * Gibt die Aufgabe des Timers zurück
-	 * @return TimerTask tt
-	 */
+	/** Gibt die Aufgabe des Timers zurück
+	 *
+	 * @return TimerTask tt */
 	public TimerTask getTask()
 	{
-		TimerTask tt = new TimerTask()
+		final TimerTask tt = new TimerTask()
 		{
 			@Override
 			public void run()
@@ -46,10 +45,9 @@ public class StartPointTimer
 		return tt;
 	}
 
-	/**
-	 * Gibt den Timer zurück
-	 * @return Timer timer
-	 */
+	/** Gibt den Timer zurück
+	 *
+	 * @return Timer timer */
 	public Timer getTimer()
 	{
 		return timer;

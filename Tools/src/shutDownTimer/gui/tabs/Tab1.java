@@ -21,22 +21,26 @@ import shutDownTimer.operations.StopTimer;
 
 public class Tab1 extends JPanel
 {
-	private final static String[] UNITS = new String[] { "Sekunden", "Minuten", "Stunden" };
-	private final static String DEFAULTTEXT= "Bitte gib die gew\u00fcnschte Zeit ein.";
+	private final static String DEFAULTTEXT = "Bitte gib die gew\u00fcnschte Zeit ein.";
 	private static final Logger LOG = Logger.getLogger(Tab1.class.getName());
-	private static final long serialVersionUID = 1586228218070110746L;
+	/** Tab1 Zeitdauer */
+	private static final long serialVersionUID = 456496L;
+	private final static String[] UNITS = new String[] { "Sekunden", "Minuten", "Stunden" };
+
 	private JPanel contentMidPanel;
-	private JPanel countDownPanel;
-	private JPanel inputPanel;
 	private JLabel countDownLabel;
+	private JPanel countDownPanel;
 	private JLabel einheitTextLabel;
+	private JPanel inputPanel;
 	private KeyAdapter ka;
 	private JTextField timeField;
 	private JComboBox<String> unitBox;
-	
+
+	/** Konstruktor für den ersten Tab <br>
+	 * Zeitdauerbestimmung */
 	public Tab1()
 	{
-		LOG.info("Tab1 wird geladen");
+		Tab1.LOG.info("Tab1 wird geladen");
 		setOpaque(false);
 		setLayout(new BorderLayout());
 		add(getInputPanel(), BorderLayout.NORTH);
@@ -46,7 +50,7 @@ public class Tab1 extends JPanel
 	public JComboBox<String> getCombobox()
 	{
 		unitBox = new JComboBox<>();
-		for (final String unit : UNITS)
+		for (final String unit : Tab1.UNITS)
 			unitBox.addItem(unit);
 		unitBox.addKeyListener(getKeyAdapter());
 		unitBox.setOpaque(true);
@@ -129,11 +133,11 @@ public class Tab1 extends JPanel
 							cdS = 0;
 							break;
 					}
-					String msg = "Soll der Rechner in " + timeString + " " + unitString + " herunterfahren?";
+					final String msg = "Soll der Rechner in " + timeString + " " + unitString + " herunterfahren?";
 					final int response = JOptionPane.showConfirmDialog(null, msg, "Sicher?", JOptionPane.YES_NO_OPTION);
 					if (response == JOptionPane.YES_OPTION)
 					{
-						LOG.fine(cdH + " " + cdMin + " " + cdS);
+						Tab1.LOG.fine(cdH + " " + cdMin + " " + cdS);
 						timer = new StartDurationTimer(Tab1.this, unitString, timeString, cdH, cdMin, cdS,
 								durationInSec).getTimer();
 					}
@@ -165,7 +169,7 @@ public class Tab1 extends JPanel
 	{
 		if (timeField == null)
 		{
-			timeField = new JTextField(DEFAULTTEXT);
+			timeField = new JTextField(Tab1.DEFAULTTEXT);
 			timeField.setMinimumSize(new Dimension(200, 20));
 			timeField.setMaximumSize(new Dimension(200, 20));
 			timeField.setPreferredSize(new Dimension(200, 20));
