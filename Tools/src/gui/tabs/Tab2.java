@@ -75,11 +75,12 @@ public class Tab2 extends JPanel
 				if (ke.getKeyCode() == KeyEvent.VK_ENTER)
 				{
 					LOG.info("Now: "+LocalDateTime.now().toString());
-					LOG.info("Now+1h: "+LocalDateTime.now().plusHours(Long.parseLong(hBox.getSelectedItem().toString())).toString());
+					LOG.info("Now+1h: "+ LocalDateTime.);
 					
 					LocalDateTime ldt = null;
 					try
 					{
+						//TODO das ist die Duration!!!!
 						ldt = LocalDateTime.now().plusHours(Long.parseLong(hBox.getSelectedItem().toString()))
 								.plusMinutes(Long.parseLong(minBox.getSelectedItem().toString()))
 								.plusSeconds(Long.parseLong(sBox.getSelectedItem().toString()));
