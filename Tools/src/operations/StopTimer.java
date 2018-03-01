@@ -6,7 +6,7 @@ import java.util.Timer;
 public class StopTimer
 {
 	/** Bricht den <i>windows</i>-timer und den Timer als <i>Objekt</i> ab
-	 * 
+	 *
 	 * @param timer
 	 */
 	public StopTimer(final Timer timer)

@@ -1,6 +1,7 @@
 package gui.tabs;
 
 import java.awt.BorderLayout;
+import java.awt.Font;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.text.DecimalFormat;
@@ -15,6 +16,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import constants.Colors;
 import constants.Messages;
 import constants.Time;
 import operations.StartPointTimer;
@@ -26,10 +28,11 @@ public class Tab2 extends JPanel
 	/** Tab2 Zeitpunkt */
 	private static final long serialVersionUID = 1347L;
 	private JPanel contentMidPanel;
+	private JPanel inputPanel;
 	private JLabel countDownLabel;
 	private Vector<String> h, min, s;
 	private JComboBox<String> hBox, minBox, sBox;
-	private JPanel inputPanel;
+
 	private final DecimalFormat df = Time.DF;
 
 	/** Konstruktor für den zweiten Tab<br>
@@ -40,13 +43,14 @@ public class Tab2 extends JPanel
 		initArray();
 		setOpaque(false);
 		setLayout(new BorderLayout());
-		add(getInputPanel(), BorderLayout.NORTH);
-		add(getMidContent(), BorderLayout.CENTER);
+		add(getInputPanel(), BorderLayout.CENTER);
+		add(getMidContent(), BorderLayout.SOUTH);
 	}
 
 	public JLabel getCountDownLabel()
 	{
 		if (countDownLabel == null) countDownLabel = new JLabel("Restzeit: ");
+		countDownLabel.setForeground(Colors.TEXT_COLOR);
 		return countDownLabel;
 	}
 
@@ -56,6 +60,7 @@ public class Tab2 extends JPanel
 		{
 			hBox = new JComboBox<>(h);
 			hBox.addKeyListener(getKA());
+			hBox.setSelectedItem(Time.LDT_NOW.getHour() + "");
 		}
 		return hBox;
 	}
@@ -67,9 +72,17 @@ public class Tab2 extends JPanel
 			inputPanel = new JPanel();
 			inputPanel.setOpaque(false);
 			inputPanel.add(getHInputBox());
-			inputPanel.add(new JLabel(":"));
+			JLabel l1=new JLabel(":");
+			l1.setBackground(Colors.BG_COLOR);
+			l1.setOpaque(true);
+			l1.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 18));
+			JLabel l2=new JLabel(":");
+			l2.setBackground(Colors.BG_COLOR);
+			l2.setOpaque(true);
+			l2.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 18));
+			inputPanel.add(l1);
 			inputPanel.add(getMinInputBox());
-			inputPanel.add(new JLabel(":"));
+			inputPanel.add(l2);
 			inputPanel.add(getSInputBox());
 		}
 		return inputPanel;
@@ -86,7 +99,7 @@ public class Tab2 extends JPanel
 			{
 				if (ke.getKeyCode() == KeyEvent.VK_ENTER)
 				{
-					LOG.info("Now: " + LocalDateTime.now().toString());
+					LOG.info("Now: " + Time.LDT_NOW.toString());
 					LocalDateTime ldt = null;
 					try
 					{
@@ -151,6 +164,7 @@ public class Tab2 extends JPanel
 		{
 			minBox = new JComboBox<>(min);
 			minBox.addKeyListener(getKA());
+			minBox.setSelectedItem(Time.LDT_NOW.getMinute() + "");
 		}
 		return minBox;
 	}
@@ -161,6 +175,7 @@ public class Tab2 extends JPanel
 		{
 			sBox = new JComboBox<>(s);
 			sBox.addKeyListener(getKA());
+			sBox.setSelectedItem(Time.LDT_NOW.getSecond() + "");
 		}
 		return sBox;
 	}

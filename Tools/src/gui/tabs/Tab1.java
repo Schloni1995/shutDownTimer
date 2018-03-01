@@ -1,7 +1,6 @@
 package gui.tabs;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
@@ -16,6 +15,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import constants.Colors;
 import constants.Messages;
 import operations.Converter;
 import operations.StartDurationTimer;
@@ -43,8 +43,8 @@ public class Tab1 extends JPanel
 		Tab1.LOG.info("Tab1 wird geladen");
 		setOpaque(false);
 		setLayout(new BorderLayout());
-		add(getInputPanel(), BorderLayout.NORTH);
-		add(getMidContent(), BorderLayout.CENTER);
+		add(getInputPanel(), BorderLayout.CENTER);
+		add(getMidContent(), BorderLayout.SOUTH);
 	}
 
 	public JComboBox<String> getCombobox()
@@ -60,13 +60,14 @@ public class Tab1 extends JPanel
 	public JLabel getCountDownLabel()
 	{
 		if (countDownLabel == null) countDownLabel = new JLabel("Restzeit: ");
+		countDownLabel.setForeground(Colors.TEXT_COLOR);
 		return countDownLabel;
 	}
 
 	public JLabel getEinheitTextLabel()
 	{
 		einheitTextLabel = new JLabel("Einheit");
-		einheitTextLabel.setForeground(Color.black);
+		einheitTextLabel.setForeground(Colors.TEXT_COLOR);
 		return einheitTextLabel;
 	}
 
