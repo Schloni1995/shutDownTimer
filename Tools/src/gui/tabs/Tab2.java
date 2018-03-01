@@ -16,6 +16,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import constants.Messages;
+import constants.Time;
 import operations.StartPointTimer;
 import operations.StopTimer;
 
@@ -29,6 +30,7 @@ public class Tab2 extends JPanel
 	private Vector<String> h, min, s;
 	private JComboBox<String> hBox, minBox, sBox;
 	private JPanel inputPanel;
+	private final DecimalFormat df = Time.DF;
 
 	/** Konstruktor für den zweiten Tab<br>
 	 * Zeitpunktbestimmung */
@@ -74,18 +76,19 @@ public class Tab2 extends JPanel
 			{
 				if (ke.getKeyCode() == KeyEvent.VK_ENTER)
 				{
-					LOG.info("Now: "+LocalDateTime.now().toString());
-					LOG.info("Now+1h: "+ LocalDateTime.);
-					
+					LOG.info("Now: " + LocalDateTime.now().toString());
 					LocalDateTime ldt = null;
 					try
 					{
-						//TODO das ist die Duration!!!!
-						ldt = LocalDateTime.now().plusHours(Long.parseLong(hBox.getSelectedItem().toString()))
-								.plusMinutes(Long.parseLong(minBox.getSelectedItem().toString()))
-								.plusSeconds(Long.parseLong(sBox.getSelectedItem().toString()));
-						
-						LOG.info(ldt.toString());
+						int year, month, dayOfMonth, hour, minute, second;
+						year = LocalDateTime.now().getYear();
+						month = LocalDateTime.now().getMonthValue();
+						dayOfMonth = LocalDateTime.now().getDayOfMonth();
+						hour = Integer.parseInt(hBox.getSelectedItem().toString());
+						minute = Integer.parseInt(minBox.getSelectedItem().toString());
+						second = Integer.parseInt(sBox.getSelectedItem().toString());
+						ldt = LocalDateTime.of(year, month, dayOfMonth, hour, minute, second);
+						LOG.info("Target: " + ldt.toString());
 					}
 					catch (final DateTimeException e)
 					{
@@ -95,19 +98,26 @@ public class Tab2 extends JPanel
 					final int h = ldt.getHour();
 					final int m = ldt.getMinute();
 					final int s = ldt.getSecond();
-					LOG.fine("Uhrzeit: " + h + ":" + m + ":" + s);
-					final String msg = "Soll der Rechner " + h + ":" + m + ":" + s + " Uhr heruntergefahren werden?";
+					LOG.info("Uhrzeit: " + df.format(h) + ":" + df.format(m) + ":" + df.format(s));
+
+					final String msg = "Soll der Rechner " + df.format(h) + ":" + df.format(m) + ":"
+							+ df.format(s) + " Uhr heruntergefahren werden?";
 					final int response = JOptionPane.showConfirmDialog(null, msg, "Sicher?", JOptionPane.YES_NO_OPTION);
 					if (response == JOptionPane.YES_OPTION)
 					{
 						timer = new StartPointTimer(Tab2.this, ldt).getTimer();
 					}
 					else
+					{
 						JOptionPane.showMessageDialog(Tab2.this, Messages.NOT_SHUTDOWN_MESSAGE);
+						LOG.info(Messages.NOT_SHUTDOWN_MESSAGE);
+					}
+
 				}
 				else if (ke.getKeyCode() == KeyEvent.VK_ESCAPE) if (timer != null)
 				{
 					new StopTimer(timer);
+					LOG.info(Messages.ESCAPE_MESSAGE);
 					JOptionPane.showMessageDialog(Tab2.this, Messages.ESCAPE_MESSAGE);
 				}
 				else
@@ -163,7 +173,7 @@ public class Tab2 extends JPanel
 		h = new Vector<>();
 		min = new Vector<>();
 		s = new Vector<>();
-		final DecimalFormat df = new DecimalFormat("00");
+		
 		for (int i = 0; i < 24; i++)
 			h.add(df.format(i));
 

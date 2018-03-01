@@ -5,12 +5,13 @@ import java.util.Timer;
 import java.util.logging.Logger;
 
 import constants.Messages;
+import constants.Time;
 import gui.tabs.Tab2;
 import timertask.ShutDownTask;
 
 public class StartPointTimer
 {
-	private final static LocalDateTime LDT_NOW = LocalDateTime.now();
+	
 	private static final Logger LOG = Logger.getLogger(StartPointTimer.class.getName());
 	public int cdH, cdMin, cdS;
 	private final TimeDiff timeDiff;
@@ -25,7 +26,7 @@ public class StartPointTimer
 	{
 		LOG.fine(Messages.TIMER_START_MESSAGE);
 		timer = new Timer();
-		timeDiff = new TimeDiff(targetTime, StartPointTimer.LDT_NOW);
+		timeDiff = new TimeDiff(targetTime, Time.LDT_NOW);
 		cdH = timeDiff.getCdH();
 		cdMin = timeDiff.getCdMin();
 		cdS = timeDiff.getCdS();
