@@ -30,9 +30,13 @@ public class StartPointTimer
 		cdH = timeDiff.getCdH();
 		cdMin = timeDiff.getCdMin();
 		cdS = timeDiff.getCdS();
+		LOG.info("TimeDiff " + cdH + " Hours " + cdMin + " Minutes " + cdS + " Seconds");
 		timer.schedule(new ShutDownTask(cdH, cdMin, cdS, tab), 0, 1000);
-
-		new ShutDown(new Converter("", (cdH * 3600) + (cdMin * 60) + cdS).getDurationInSec());
+		
+		//TODO Falsches Kommando
+		int duration= (int)new Converter("", (cdH * 3600) + (cdMin * 60) + cdS).getDurationInSec();
+		LOG.info("Shutdown in " + duration +" Seconds");
+		new ShutDown(duration);
 	}
 
 	/** Gibt den Timer zurück

@@ -108,7 +108,7 @@ public class Tab2 extends JPanel
 					final int h = ldt.getHour();
 					final int m = ldt.getMinute();
 					final int s = ldt.getSecond();
-					LOG.info("Uhrzeit: " + df.format(h) + ":" + df.format(m) + ":" + df.format(s));
+					LOG.fine("Uhrzeit: " + df.format(h) + ":" + df.format(m) + ":" + df.format(s));
 
 					final String msg = "Soll der Rechner " + df.format(h) + ":" + df.format(m) + ":" + df.format(s)
 							+ " Uhr heruntergefahren werden?";

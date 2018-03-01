@@ -98,7 +98,7 @@ public class Tab1 extends JPanel
 					final float cdH = conv.getCdH();
 					final float cdMin = conv.getCdMin();
 					final float cdS = conv.getCdS();
-					final float durationInSec = conv.getDurationInSec();
+					final int durationInSec = conv.getDurationInSec();
 
 					LOG.fine(cdH + " " + cdMin + " " + cdS);
 					final String msg = "Soll der Rechner in " + timeString + " " + unitString + " herunterfahren?";

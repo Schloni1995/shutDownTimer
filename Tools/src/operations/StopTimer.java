@@ -15,6 +15,7 @@ public class StopTimer
 		{
 			Runtime.getRuntime().exec("shutdown -a");
 			timer.cancel();
+			timer.purge();
 		}
 		catch (final IOException e)
 		{

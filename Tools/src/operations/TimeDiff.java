@@ -1,5 +1,6 @@
 package operations;
 
+import java.time.Duration;
 import java.time.LocalDateTime;
 
 public class TimeDiff
@@ -8,9 +9,18 @@ public class TimeDiff
 
 	public TimeDiff(final LocalDateTime targetTime, final LocalDateTime now)
 	{
-		setCdH(targetTime.getHour() - now.getHour());
-		setCdMin(targetTime.getMinute() - now.getMinute());
-		setCdS(targetTime.getSecond() - now.getSecond());
+		Duration dur = Duration.between(now, targetTime);
+		
+		// total seconds of difference (using Math.abs to avoid negative values)
+		long seconds = Math.abs(dur.getSeconds());
+		long hours = seconds / 3600;
+		seconds -= (hours * 3600);
+		long minutes = seconds / 60;
+		seconds -= (minutes * 60);
+		
+		setCdH(Math.toIntExact(hours));
+		setCdMin(Math.toIntExact(minutes));
+		setCdS(Math.toIntExact(seconds));
 	}
 
 	/** @return the cdH */

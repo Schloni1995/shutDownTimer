@@ -9,12 +9,12 @@ public class ShutDown
 {
 	private static final Logger LOG = Logger.getLogger(ShutDown.class.getName());
 
-	public ShutDown(final float tNow)
+	public ShutDown(final int tNow)
 	{
 		LOG.finer(Messages.SHUTDOWN_MESSAGE);
 		try
 		{
-			Runtime.getRuntime().exec("shutdown -s -t " + Math.round(tNow));
+			Runtime.getRuntime().exec("shutdown -s -t " + tNow);
 		}
 		catch (final IOException e)
 		{

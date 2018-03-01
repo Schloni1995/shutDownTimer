@@ -13,7 +13,7 @@ public class StartDurationTimer
 	private final Timer timer;
 
 	public StartDurationTimer(final Tab1 tab, final String unitString, final String timeString, final float cdH,
-			final float cdMin, final float cdS, final float durationInSec)
+			final float cdMin, final float cdS, final int durationInSec)
 	{
 		LOG.finer(cdH + " " + cdMin + " " + cdS);
 		timer = new Timer();

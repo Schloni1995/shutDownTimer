@@ -3,9 +3,9 @@ package operations;
 public class Converter
 {
 	private float cdH, cdMin, cdS;
-	private float durInS;
+	private int durInS;
 
-	public Converter(final String unit, final float durationInSec)
+	public Converter(final String unit, final int durationInSec)
 	{
 		this.durInS = durationInSec;
 		switch (unit)
@@ -54,7 +54,7 @@ public class Converter
 	}
 
 	/** @return the durInS */
-	public float getDurationInSec()
+	public int getDurationInSec()
 	{
 		return durInS;
 	}
