@@ -19,7 +19,7 @@ public class StartDurationTimer
 		timer = new Timer();
 		timer.schedule(new ShutDownTask(cdH, cdMin, cdS, tab), 0, 1000);
 		new ShutDown(durationInSec);
-		
+
 		// TODO tab.getCountDownTimePanel(tab.getTargetTime());
 	}
 

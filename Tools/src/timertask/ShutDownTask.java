@@ -20,7 +20,7 @@ public class ShutDownTask extends TimerTask
 	private Tab2 tab2;
 
 	/** TimerTaskObjekt - Konstruktor
-	 * 
+	 *
 	 * @param cdH
 	 * @param cdMin
 	 * @param cdS
@@ -35,7 +35,7 @@ public class ShutDownTask extends TimerTask
 	}
 
 	/** TimerTaskObjekt - Konstruktor
-	 * 
+	 *
 	 * @param cdH
 	 * @param cdMin
 	 * @param cdS
@@ -57,7 +57,7 @@ public class ShutDownTask extends TimerTask
 		if (tab1 != null) tab1.setCountDownText(h + " Stunden " + m + " Minuten " + s + " Sekunden");
 		else if (tab2 != null) tab2.setCountDownText(h + " Stunden " + m + " Minuten " + s + " Sekunden");
 
-		if (h <= 0 && m <= 0 && s == 0) cancel();
+		if ((h <= 0) && (m <= 0) && (s == 0)) cancel();
 		if (--s < 0)
 		{
 			s = 59;

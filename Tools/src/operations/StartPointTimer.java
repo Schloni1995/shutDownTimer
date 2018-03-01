@@ -11,7 +11,7 @@ import timertask.ShutDownTask;
 
 public class StartPointTimer
 {
-	
+
 	private static final Logger LOG = Logger.getLogger(StartPointTimer.class.getName());
 	public int cdH, cdMin, cdS;
 	private final TimeDiff timeDiff;
@@ -31,8 +31,8 @@ public class StartPointTimer
 		cdMin = timeDiff.getCdMin();
 		cdS = timeDiff.getCdS();
 		timer.schedule(new ShutDownTask(cdH, cdMin, cdS, tab), 0, 1000);
-		
-		new ShutDown(new Converter("", cdH * 3600 + cdMin*60 + cdS).getDurationInSec());
+
+		new ShutDown(new Converter("", (cdH * 3600) + (cdMin * 60) + cdS).getDurationInSec());
 	}
 
 	/** Gibt den Timer zurück

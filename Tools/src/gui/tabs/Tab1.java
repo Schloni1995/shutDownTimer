@@ -82,7 +82,7 @@ public class Tab1 extends JPanel
 
 	public KeyAdapter getKeyAdapter()
 	{
-		KeyAdapter ka = new KeyAdapter()
+		final KeyAdapter ka = new KeyAdapter()
 		{
 			private Timer timer;
 
@@ -94,21 +94,18 @@ public class Tab1 extends JPanel
 
 				if (evt.getKeyCode() == KeyEvent.VK_ENTER)
 				{
-					Converter conv = new Converter(unitString,Integer.parseInt(timeString));
-					float cdH = conv.getCdH();
-					float cdMin = conv.getCdMin();
-					float cdS = conv.getCdS();
-					float durationInSec = conv.getDurationInSec();
-					
+					final Converter conv = new Converter(unitString, Integer.parseInt(timeString));
+					final float cdH = conv.getCdH();
+					final float cdMin = conv.getCdMin();
+					final float cdS = conv.getCdS();
+					final float durationInSec = conv.getDurationInSec();
+
 					LOG.fine(cdH + " " + cdMin + " " + cdS);
 					final String msg = "Soll der Rechner in " + timeString + " " + unitString + " herunterfahren?";
 					final int response = JOptionPane.showConfirmDialog(null, msg, "Sicher?", JOptionPane.YES_NO_OPTION);
-					
-					if (response == JOptionPane.YES_OPTION)
-					{
-						timer = new StartDurationTimer(Tab1.this, unitString, timeString, cdH, cdMin, cdS,
-								durationInSec).getTimer();
-					}
+
+					if (response == JOptionPane.YES_OPTION) timer = new StartDurationTimer(Tab1.this, unitString,
+							timeString, cdH, cdMin, cdS, durationInSec).getTimer();
 					else
 						JOptionPane.showMessageDialog(Tab1.this, Messages.NOT_SHUTDOWN_MESSAGE);
 				}

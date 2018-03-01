@@ -50,6 +50,16 @@ public class Tab2 extends JPanel
 		return countDownLabel;
 	}
 
+	private JComboBox<String> getHInputBox()
+	{
+		if (hBox == null)
+		{
+			hBox = new JComboBox<>(h);
+			hBox.addKeyListener(getKA());
+		}
+		return hBox;
+	}
+
 	private JPanel getInputPanel()
 	{
 		if (inputPanel == null)
@@ -100,13 +110,10 @@ public class Tab2 extends JPanel
 					final int s = ldt.getSecond();
 					LOG.info("Uhrzeit: " + df.format(h) + ":" + df.format(m) + ":" + df.format(s));
 
-					final String msg = "Soll der Rechner " + df.format(h) + ":" + df.format(m) + ":"
-							+ df.format(s) + " Uhr heruntergefahren werden?";
+					final String msg = "Soll der Rechner " + df.format(h) + ":" + df.format(m) + ":" + df.format(s)
+							+ " Uhr heruntergefahren werden?";
 					final int response = JOptionPane.showConfirmDialog(null, msg, "Sicher?", JOptionPane.YES_NO_OPTION);
-					if (response == JOptionPane.YES_OPTION)
-					{
-						timer = new StartPointTimer(Tab2.this, ldt).getTimer();
-					}
+					if (response == JOptionPane.YES_OPTION) timer = new StartPointTimer(Tab2.this, ldt).getTimer();
 					else
 					{
 						JOptionPane.showMessageDialog(Tab2.this, Messages.NOT_SHUTDOWN_MESSAGE);
@@ -138,16 +145,6 @@ public class Tab2 extends JPanel
 		return contentMidPanel;
 	}
 
-	private JComboBox<String> getHInputBox()
-	{
-		if (hBox == null)
-		{
-			hBox = new JComboBox<>(h);
-			hBox.addKeyListener(getKA());
-		}
-		return hBox;
-	}
-
 	private JComboBox<String> getMinInputBox()
 	{
 		if (minBox == null)
@@ -173,7 +170,7 @@ public class Tab2 extends JPanel
 		h = new Vector<>();
 		min = new Vector<>();
 		s = new Vector<>();
-		
+
 		for (int i = 0; i < 24; i++)
 			h.add(df.format(i));
 
