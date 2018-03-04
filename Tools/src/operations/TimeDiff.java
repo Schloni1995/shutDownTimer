@@ -17,7 +17,7 @@ public class TimeDiff
 		seconds -= (hours * 3600);
 		final long minutes = seconds / 60;
 		seconds -= (minutes * 60);
-
+		
 		setCdH(Math.toIntExact(hours));
 		setCdMin(Math.toIntExact(minutes));
 		setCdS(Math.toIntExact(seconds));

@@ -11,7 +11,6 @@ import timertask.ShutDownTask;
 
 public class StartPointTimer
 {
-
 	private static final Logger LOG = Logger.getLogger(StartPointTimer.class.getName());
 	public int cdH, cdMin, cdS;
 	private final TimeDiff timeDiff;
