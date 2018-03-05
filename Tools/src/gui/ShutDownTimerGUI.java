@@ -21,7 +21,6 @@ import gui.tabs.Tab2;
 
 public class ShutDownTimerGUI extends JFrame
 {
-
 	private static final Logger LOG = Logger.getLogger(ShutDownTimerGUI.class.getName());
 	private static final long serialVersionUID = -1219716251617291329L;
 	private Tab1 tab1;

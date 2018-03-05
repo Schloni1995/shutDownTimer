@@ -1,7 +1,8 @@
 package gui.tabs;
 
-import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.KeyAdapter;
@@ -25,7 +26,6 @@ public class Tab1 extends JPanel
 {
 	private final static String DEFAULTTEXT = "Bitte gib die gew\u00fcnschte Zeit ein.";
 	private static final Logger LOG = Logger.getLogger(Tab1.class.getName());
-	/** Tab1 Zeitdauer */
 	private static final long serialVersionUID = 456496L;
 	private final static String[] UNITS = new String[] { "Sekunden", "Minuten", "Stunden" };
 
@@ -35,6 +35,9 @@ public class Tab1 extends JPanel
 	private JPanel inputPanel;
 	private JTextField timeField;
 	private JComboBox<String> unitBox;
+	
+	private GridBagLayout gbL;
+	private GridBagConstraints gbC;
 
 	/** Konstruktor für den ersten Tab <br>
 	 * Zeitdauerbestimmung */
@@ -42,9 +45,29 @@ public class Tab1 extends JPanel
 	{
 		Tab1.LOG.info("Tab1 wird geladen");
 		setOpaque(false);
-		setLayout(new BorderLayout());
-		add(getInputPanel(), BorderLayout.CENTER);
-		add(getMidContent(), BorderLayout.SOUTH);
+		initGui();
+	}
+	
+	private void initGui()
+	{
+		gbL = new GridBagLayout();
+		setLayout(gbL);
+		gbC = new GridBagConstraints();
+		
+		gbC.anchor = GridBagConstraints.NORTHWEST;
+		gbC.weightx =1;
+		gbC.weighty =1;
+		
+		gbC.gridx = 0;
+		gbC.gridy = 0;
+		add(getInputPanel(), gbC);
+		
+		gbC.weighty = 0;
+		gbC.gridx = 0;
+		gbC.gridy = 1;
+		add(getMidContent(), gbC);
+		
+		
 	}
 
 	public JComboBox<String> getCombobox()
@@ -61,6 +84,9 @@ public class Tab1 extends JPanel
 	{
 		if (countDownLabel == null) countDownLabel = new JLabel("Restzeit: ");
 		countDownLabel.setForeground(Colors.TEXT_COLOR);
+		countDownLabel.setBackground(Colors.BG_COLOR);
+		countDownLabel.setOpaque(true);
+		
 		return countDownLabel;
 	}
 

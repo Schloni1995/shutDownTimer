@@ -1,7 +1,8 @@
 package gui.tabs;
 
-import java.awt.BorderLayout;
 import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.text.DecimalFormat;
@@ -34,6 +35,8 @@ public class Tab2 extends JPanel
 	private JComboBox<String> hBox, minBox, sBox;
 
 	private final DecimalFormat df = Time.DF;
+	private GridBagLayout gbL;
+	private GridBagConstraints gbC;
 
 	/** Konstruktor für den zweiten Tab<br>
 	 * Zeitpunktbestimmung */
@@ -42,15 +45,38 @@ public class Tab2 extends JPanel
 		LOG.info("Tab2 wird geladen");
 		initArray();
 		setOpaque(false);
-		setLayout(new BorderLayout());
-		add(getInputPanel(), BorderLayout.CENTER);
-		add(getMidContent(), BorderLayout.SOUTH);
+		
+		initGui();
+		
+	}
+
+	private void initGui()
+	{
+		gbL = new GridBagLayout();
+		setLayout(gbL);
+		gbC = new GridBagConstraints();
+		
+		gbC.anchor = GridBagConstraints.NORTHWEST;
+		gbC.weightx =1;
+		gbC.weighty =1;
+		
+		gbC.gridx = 0;
+		gbC.gridy = 0;
+		add(getInputPanel(), gbC);
+		
+		gbC.weighty = 0;
+		gbC.gridx = 0;
+		gbC.gridy = 1;
+		add(getMidContent(), gbC);		
+		
 	}
 
 	public JLabel getCountDownLabel()
 	{
 		if (countDownLabel == null) countDownLabel = new JLabel("Restzeit: ");
 		countDownLabel.setForeground(Colors.TEXT_COLOR);
+		countDownLabel.setBackground(Colors.BG_COLOR);
+		countDownLabel.setOpaque(true);
 		return countDownLabel;
 	}
 
@@ -60,7 +86,8 @@ public class Tab2 extends JPanel
 		{
 			hBox = new JComboBox<>(h);
 			hBox.addKeyListener(getKA());
-			hBox.setSelectedItem(Time.LDT_NOW.getHour() + "");
+			hBox.setSelectedItem(Time.DF.format(Time.LDT_NOW.getHour()) + "");
+			
 		}
 		return hBox;
 	}
@@ -164,7 +191,7 @@ public class Tab2 extends JPanel
 		{
 			minBox = new JComboBox<>(min);
 			minBox.addKeyListener(getKA());
-			minBox.setSelectedItem(Time.LDT_NOW.getMinute() + "");
+			minBox.setSelectedItem(Time.DF.format(Time.LDT_NOW.getMinute()) + "");
 		}
 		return minBox;
 	}
@@ -175,7 +202,7 @@ public class Tab2 extends JPanel
 		{
 			sBox = new JComboBox<>(s);
 			sBox.addKeyListener(getKA());
-			sBox.setSelectedItem(Time.LDT_NOW.getSecond() + "");
+			sBox.setSelectedItem(Time.DF.format(Time.LDT_NOW.getSecond()) + "");
 		}
 		return sBox;
 	}

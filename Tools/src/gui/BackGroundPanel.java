@@ -20,7 +20,7 @@ public class BackGroundPanel extends JPanel
 	public BackGroundPanel()
 	{
 		final MediaTracker mt = new MediaTracker(this);
-		img = Toolkit.getDefaultToolkit().getImage(Paths.BACKGROUND);
+		img = Toolkit.getDefaultToolkit().getImage(Paths.BACKGROUND2);
 		mt.addImage(img, 0);
 		try
 		{
@@ -32,8 +32,8 @@ public class BackGroundPanel extends JPanel
 		}
 
 		int w, h;
-		w =(int) (img.getWidth(null)*0.75);
-		h =(int) (img.getHeight(null)*0.75);
+		w =(int) (img.getWidth(null)*0.45);
+		h =(int) (img.getHeight(null)*0.45);
 		setPreferredSize(new Dimension(w, h));
 		
 		LOG.info("Image-Dimension: "+ w + "x" + h);
