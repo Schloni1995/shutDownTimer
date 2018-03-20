@@ -6,7 +6,6 @@ import java.awt.Image;
 import java.awt.MediaTracker;
 import java.awt.Toolkit;
 import java.util.logging.Logger;
-
 import javax.swing.JPanel;
 
 import constants.Paths;
@@ -20,7 +19,8 @@ public class BackGroundPanel extends JPanel
 	public BackGroundPanel()
 	{
 		final MediaTracker mt = new MediaTracker(this);
-		img = Toolkit.getDefaultToolkit().getImage(Paths.BACKGROUND2);
+		img = Toolkit.getDefaultToolkit()
+				.getImage(getClass().getClassLoader().getResource(Paths.BACKGROUND2).getFile());
 		mt.addImage(img, 0);
 		try
 		{
@@ -32,11 +32,11 @@ public class BackGroundPanel extends JPanel
 		}
 
 		int w, h;
-		w =(int) (img.getWidth(null)*0.45);
-		h =(int) (img.getHeight(null)*0.45);
+		w = (int) (img.getWidth(null) * 0.45);
+		h = (int) (img.getHeight(null) * 0.45);
 		setPreferredSize(new Dimension(w, h));
-		
-		LOG.info("Image-Dimension: "+ w + "x" + h);
+
+		LOG.info("Image-Dimension: " + w + "x" + h);
 	}
 
 	@Override
