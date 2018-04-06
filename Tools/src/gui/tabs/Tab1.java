@@ -35,7 +35,7 @@ public class Tab1 extends JPanel
 	private JPanel inputPanel;
 	private JTextField timeField;
 	private JComboBox<String> unitBox;
-	
+
 	private GridBagLayout gbL;
 	private GridBagConstraints gbC;
 
@@ -46,28 +46,6 @@ public class Tab1 extends JPanel
 		Tab1.LOG.info("Tab1 wird geladen");
 		setOpaque(false);
 		initGui();
-	}
-	
-	private void initGui()
-	{
-		gbL = new GridBagLayout();
-		setLayout(gbL);
-		gbC = new GridBagConstraints();
-		
-		gbC.anchor = GridBagConstraints.NORTHWEST;
-		gbC.weightx =1;
-		gbC.weighty =1;
-		
-		gbC.gridx = 0;
-		gbC.gridy = 0;
-		add(getInputPanel(), gbC);
-		
-		gbC.weighty = 0;
-		gbC.gridx = 0;
-		gbC.gridy = 1;
-		add(getMidContent(), gbC);
-		
-		
 	}
 
 	public JComboBox<String> getCombobox()
@@ -86,7 +64,7 @@ public class Tab1 extends JPanel
 		countDownLabel.setForeground(Colors.TEXT_COLOR);
 		countDownLabel.setBackground(Colors.BG_COLOR);
 		countDownLabel.setOpaque(true);
-		
+
 		return countDownLabel;
 	}
 
@@ -181,6 +159,27 @@ public class Tab1 extends JPanel
 			timeField.setOpaque(true);
 		}
 		return timeField;
+	}
+
+	private void initGui()
+	{
+		gbL = new GridBagLayout();
+		setLayout(gbL);
+		gbC = new GridBagConstraints();
+
+		gbC.anchor = GridBagConstraints.NORTHWEST;
+		gbC.weightx = 1;
+		gbC.weighty = 1;
+
+		gbC.gridx = 0;
+		gbC.gridy = 0;
+		add(getInputPanel(), gbC);
+
+		gbC.weighty = 0;
+		gbC.gridx = 0;
+		gbC.gridy = 1;
+		add(getMidContent(), gbC);
+
 	}
 
 	public void setCountDownText(final String timeLeft)

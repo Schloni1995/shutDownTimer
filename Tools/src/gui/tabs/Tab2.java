@@ -45,30 +45,9 @@ public class Tab2 extends JPanel
 		LOG.info("Tab2 wird geladen");
 		initArray();
 		setOpaque(false);
-		
-		initGui();
-		
-	}
 
-	private void initGui()
-	{
-		gbL = new GridBagLayout();
-		setLayout(gbL);
-		gbC = new GridBagConstraints();
-		
-		gbC.anchor = GridBagConstraints.NORTHWEST;
-		gbC.weightx =1;
-		gbC.weighty =1;
-		
-		gbC.gridx = 0;
-		gbC.gridy = 0;
-		add(getInputPanel(), gbC);
-		
-		gbC.weighty = 0;
-		gbC.gridx = 0;
-		gbC.gridy = 1;
-		add(getMidContent(), gbC);		
-		
+		initGui();
+
 	}
 
 	public JLabel getCountDownLabel()
@@ -87,7 +66,7 @@ public class Tab2 extends JPanel
 			hBox = new JComboBox<>(h);
 			hBox.addKeyListener(getKA());
 			hBox.setSelectedItem(Time.DF.format(Time.LDT_NOW.getHour()) + "");
-			
+
 		}
 		return hBox;
 	}
@@ -99,11 +78,11 @@ public class Tab2 extends JPanel
 			inputPanel = new JPanel();
 			inputPanel.setOpaque(false);
 			inputPanel.add(getHInputBox());
-			JLabel l1=new JLabel(":");
+			final JLabel l1 = new JLabel(":");
 			l1.setBackground(Colors.BG_COLOR);
 			l1.setOpaque(true);
 			l1.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 18));
-			JLabel l2=new JLabel(":");
+			final JLabel l2 = new JLabel(":");
 			l2.setBackground(Colors.BG_COLOR);
 			l2.setOpaque(true);
 			l2.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 18));
@@ -221,6 +200,27 @@ public class Tab2 extends JPanel
 
 		for (int i = 0; i < 60; i++)
 			s.add(df.format(i));
+
+	}
+
+	private void initGui()
+	{
+		gbL = new GridBagLayout();
+		setLayout(gbL);
+		gbC = new GridBagConstraints();
+
+		gbC.anchor = GridBagConstraints.NORTHWEST;
+		gbC.weightx = 1;
+		gbC.weighty = 1;
+
+		gbC.gridx = 0;
+		gbC.gridy = 0;
+		add(getInputPanel(), gbC);
+
+		gbC.weighty = 0;
+		gbC.gridx = 0;
+		gbC.gridy = 1;
+		add(getMidContent(), gbC);
 
 	}
 

@@ -21,10 +21,10 @@ public class BackGroundPanel extends JPanel
 	public BackGroundPanel()
 	{
 		final MediaTracker mt = new MediaTracker(this);
-		String path = this.getClass().getClassLoader().getResource(Paths.BACKGROUND2).getFile();
+		final String path = this.getClass().getClassLoader().getResource(Paths.BACKGROUND2).getFile();
 		LOG.info("Imagepath:" + path);
 
-		File f = new File(path);
+		final File f = new File(path);
 		if (f.exists())
 		{
 			img = Toolkit.getDefaultToolkit().getImage(f.getAbsolutePath());
