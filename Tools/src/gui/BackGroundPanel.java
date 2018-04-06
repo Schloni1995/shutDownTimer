@@ -7,6 +7,7 @@ import java.awt.MediaTracker;
 import java.awt.Toolkit;
 import java.io.File;
 import java.util.logging.Logger;
+
 import javax.swing.JPanel;
 
 import constants.Paths;
@@ -20,9 +21,10 @@ public class BackGroundPanel extends JPanel
 	public BackGroundPanel()
 	{
 		final MediaTracker mt = new MediaTracker(this);
-		
-		File f = new File(this.getClass().getClassLoader().getResource(Paths.BACKGROUND2).getFile());
+		String path = this.getClass().getClassLoader().getResource(Paths.BACKGROUND2).getFile();
+		LOG.info("Imagepath:" + path);
 
+		File f = new File(path);
 		if (f.exists())
 		{
 			img = Toolkit.getDefaultToolkit().getImage(f.getAbsolutePath());
