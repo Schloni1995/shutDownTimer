@@ -39,8 +39,8 @@ public class BackGroundPanel extends JPanel
 			}
 
 			int w, h;
-			w = (int) (img.getWidth(null) * 0.45);
-			h = (int) (img.getHeight(null) * 0.45);
+			w = (int) (img.getWidth(null) * 0.3);
+			h = (int) (img.getHeight(null) * 0.3);
 			setPreferredSize(new Dimension(w, h));
 
 			LOG.info("Image-Dimension: " + w + "x" + h);

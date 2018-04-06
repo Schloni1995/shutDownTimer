@@ -29,8 +29,10 @@ public class Tab2 extends JPanel
 	/** Tab2 Zeitpunkt */
 	private static final long serialVersionUID = 1347L;
 	private JPanel contentMidPanel;
+	private JPanel formInputPanel;
 	private JPanel inputPanel;
 	private JLabel countDownLabel;
+	private JLabel l1, l2, hourLabel, minuteLabel, secondLabel;
 	private Vector<String> h, min, s;
 	private JComboBox<String> hBox, minBox, sBox;
 
@@ -71,6 +73,53 @@ public class Tab2 extends JPanel
 		return hBox;
 	}
 
+	private JPanel getFormInputPanel()
+	{
+		if (formInputPanel == null)
+		{
+			createLabels();
+
+			formInputPanel = new JPanel();
+			formInputPanel.setOpaque(false);
+			formInputPanel.add(hourLabel);
+			formInputPanel.add(l1);
+			formInputPanel.add(minuteLabel);
+			formInputPanel.add(l2);
+			formInputPanel.add(secondLabel);
+		}
+		return formInputPanel;
+	}
+
+	private void createLabels()
+	{
+		l1 = new JLabel(":");
+		l2 = new JLabel(":");
+		hourLabel = new JLabel("Stunde");
+		minuteLabel = new JLabel("Minute");
+		secondLabel = new JLabel("Sekunde");
+
+		l1.setBackground(Colors.BG_COLOR);
+		l1.setOpaque(true);
+		l1.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 18));
+
+		l2.setBackground(Colors.BG_COLOR);
+		l2.setOpaque(true);
+		l2.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 18));
+
+//		hourLabel.setBackground(Colors.BG_COLOR);
+		hourLabel.setOpaque(true);
+		hourLabel.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 18));
+		
+//		minuteLabel.setBackground(Colors.BG_COLOR);
+		minuteLabel.setOpaque(true);
+		minuteLabel.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 18));
+		
+//		secondLabel.setBackground(Colors.BG_COLOR);
+		secondLabel.setOpaque(true);
+		secondLabel.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 18));
+
+	}
+
 	private JPanel getInputPanel()
 	{
 		if (inputPanel == null)
@@ -78,17 +127,17 @@ public class Tab2 extends JPanel
 			inputPanel = new JPanel();
 			inputPanel.setOpaque(false);
 			inputPanel.add(getHInputBox());
-			final JLabel l1 = new JLabel(":");
-			l1.setBackground(Colors.BG_COLOR);
-			l1.setOpaque(true);
-			l1.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 18));
-			final JLabel l2 = new JLabel(":");
-			l2.setBackground(Colors.BG_COLOR);
-			l2.setOpaque(true);
-			l2.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 18));
-			inputPanel.add(l1);
+			final JLabel la1 = new JLabel(":");
+			la1.setBackground(Colors.BG_COLOR);
+			la1.setOpaque(true);
+			la1.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 18));
+			final JLabel la2 = new JLabel(":");
+			la2.setBackground(Colors.BG_COLOR);
+			la2.setOpaque(true);
+			la2.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 18));
+			inputPanel.add(la1);
 			inputPanel.add(getMinInputBox());
-			inputPanel.add(l2);
+			inputPanel.add(la2);
 			inputPanel.add(getSInputBox());
 		}
 		return inputPanel;
@@ -215,6 +264,8 @@ public class Tab2 extends JPanel
 
 		gbC.gridx = 0;
 		gbC.gridy = 0;
+		add(getFormInputPanel(), gbC);
+		gbC.gridy = 1;
 		add(getInputPanel(), gbC);
 
 		gbC.weighty = 0;
