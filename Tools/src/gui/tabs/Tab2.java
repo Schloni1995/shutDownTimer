@@ -26,6 +26,7 @@ import operations.StopTimer;
 public class Tab2 extends JPanel
 {
 	private static final Logger LOG = Logger.getLogger(Tab2.class.getName());
+	private static final int FONT_SIZE = 16;
 	/** Tab2 Zeitpunkt */
 	private static final long serialVersionUID = 1347L;
 	private JPanel contentMidPanel;
@@ -100,23 +101,23 @@ public class Tab2 extends JPanel
 
 		l1.setBackground(Colors.BG_COLOR);
 		l1.setOpaque(true);
-		l1.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 18));
+		l1.setFont(new Font(Font.SANS_SERIF, Font.BOLD, FONT_SIZE));
 
 		l2.setBackground(Colors.BG_COLOR);
 		l2.setOpaque(true);
-		l2.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 18));
+		l2.setFont(new Font(Font.SANS_SERIF, Font.BOLD, FONT_SIZE));
 
-//		hourLabel.setBackground(Colors.BG_COLOR);
+		// hourLabel.setBackground(Colors.BG_COLOR);
 		hourLabel.setOpaque(true);
-		hourLabel.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 18));
-		
-//		minuteLabel.setBackground(Colors.BG_COLOR);
+		hourLabel.setFont(new Font(Font.SANS_SERIF, Font.BOLD, FONT_SIZE));
+
+		// minuteLabel.setBackground(Colors.BG_COLOR);
 		minuteLabel.setOpaque(true);
-		minuteLabel.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 18));
-		
-//		secondLabel.setBackground(Colors.BG_COLOR);
+		minuteLabel.setFont(new Font(Font.SANS_SERIF, Font.BOLD, FONT_SIZE));
+
+		// secondLabel.setBackground(Colors.BG_COLOR);
 		secondLabel.setOpaque(true);
-		secondLabel.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 18));
+		secondLabel.setFont(new Font(Font.SANS_SERIF, Font.BOLD, FONT_SIZE));
 
 	}
 
@@ -130,11 +131,11 @@ public class Tab2 extends JPanel
 			final JLabel la1 = new JLabel(":");
 			la1.setBackground(Colors.BG_COLOR);
 			la1.setOpaque(true);
-			la1.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 18));
+			la1.setFont(new Font(Font.SANS_SERIF, Font.BOLD, FONT_SIZE + 2));
 			final JLabel la2 = new JLabel(":");
 			la2.setBackground(Colors.BG_COLOR);
 			la2.setOpaque(true);
-			la2.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 18));
+			la2.setFont(new Font(Font.SANS_SERIF, Font.BOLD, FONT_SIZE + 2));
 			inputPanel.add(la1);
 			inputPanel.add(getMinInputBox());
 			inputPanel.add(la2);
@@ -270,7 +271,7 @@ public class Tab2 extends JPanel
 
 		gbC.weighty = 0;
 		gbC.gridx = 0;
-		gbC.gridy = 1;
+		gbC.gridy = 2;
 		add(getMidContent(), gbC);
 
 	}
