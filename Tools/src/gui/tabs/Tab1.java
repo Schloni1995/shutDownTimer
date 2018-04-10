@@ -75,8 +75,8 @@ public class Tab1 extends JPanel
 
 	public JPanel getInputPanel()
 	{
-		GridBagLayout gbL = new GridBagLayout();
-		GridBagConstraints gbC = new GridBagConstraints();
+		final GridBagLayout gbL = new GridBagLayout();
+		final GridBagConstraints gbC = new GridBagConstraints();
 		inputPanel = new JPanel();
 		inputPanel.setLayout(gbL);
 		inputPanel.setOpaque(false);
@@ -88,23 +88,6 @@ public class Tab1 extends JPanel
 		inputPanel.add(getUnitPanel(), gbC);
 
 		return inputPanel;
-	}
-
-	private JPanel getUnitPanel()
-	{
-		unitPanel = new JPanel();
-		unitPanel.setOpaque(false);
-		GridBagLayout gbL = new GridBagLayout();
-		unitPanel.setLayout(gbL);
-		GridBagConstraints gbC = new GridBagConstraints();
-		gbC.weightx = 1;		
-		gbC.weighty = 1;		
-		
-		gbC.gridx = 0;
-		unitPanel.add(getEinheitTextLabel(), gbC);
-		gbC.gridx = 1;
-		unitPanel.add(getCombobox(), gbC);
-		return unitPanel;
 	}
 
 	public KeyAdapter getKeyAdapter()
@@ -183,11 +166,28 @@ public class Tab1 extends JPanel
 		return timeField;
 	}
 
+	private JPanel getUnitPanel()
+	{
+		unitPanel = new JPanel();
+		unitPanel.setOpaque(false);
+		final GridBagLayout gbL = new GridBagLayout();
+		unitPanel.setLayout(gbL);
+		final GridBagConstraints gbC = new GridBagConstraints();
+		gbC.weightx = 1;
+		gbC.weighty = 1;
+
+		gbC.gridx = 0;
+		unitPanel.add(getEinheitTextLabel(), gbC);
+		gbC.gridx = 1;
+		unitPanel.add(getCombobox(), gbC);
+		return unitPanel;
+	}
+
 	private void initGui()
 	{
-		GridBagLayout gbL = new GridBagLayout();
+		final GridBagLayout gbL = new GridBagLayout();
 		setLayout(gbL);
-		GridBagConstraints gbC = new GridBagConstraints();
+		final GridBagConstraints gbC = new GridBagConstraints();
 
 		gbC.anchor = GridBagConstraints.NORTHWEST;
 		gbC.weightx = 1;
@@ -197,7 +197,7 @@ public class Tab1 extends JPanel
 		gbC.gridy = 0;
 		add(getInputPanel(), gbC);
 
-		 gbC.weighty = 0;
+		gbC.weighty = 0;
 		gbC.gridx = 0;
 		gbC.gridy = 1;
 		add(getMidContent(), gbC);

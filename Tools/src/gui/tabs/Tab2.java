@@ -53,44 +53,6 @@ public class Tab2 extends JPanel
 
 	}
 
-	public JLabel getCountDownLabel()
-	{
-		if (countDownLabel == null) countDownLabel = new JLabel("Restzeit: ");
-		countDownLabel.setForeground(Colors.TEXT_COLOR);
-		countDownLabel.setBackground(Colors.BG_COLOR);
-		countDownLabel.setOpaque(true);
-		return countDownLabel;
-	}
-
-	private JComboBox<String> getHInputBox()
-	{
-		if (hBox == null)
-		{
-			hBox = new JComboBox<>(h);
-			hBox.addKeyListener(getKA());
-			hBox.setSelectedItem(Time.DF.format(Time.LDT_NOW.getHour()) + "");
-
-		}
-		return hBox;
-	}
-
-	private JPanel getFormInputPanel()
-	{
-		if (formInputPanel == null)
-		{
-			createLabels();
-
-			formInputPanel = new JPanel();
-			formInputPanel.setOpaque(false);
-			formInputPanel.add(hourLabel);
-			formInputPanel.add(l1);
-			formInputPanel.add(minuteLabel);
-			formInputPanel.add(l2);
-			formInputPanel.add(secondLabel);
-		}
-		return formInputPanel;
-	}
-
 	private void createLabels()
 	{
 		l1 = new JLabel(":");
@@ -119,6 +81,44 @@ public class Tab2 extends JPanel
 		secondLabel.setOpaque(true);
 		secondLabel.setFont(new Font(Font.SANS_SERIF, Font.BOLD, FONT_SIZE));
 
+	}
+
+	public JLabel getCountDownLabel()
+	{
+		if (countDownLabel == null) countDownLabel = new JLabel("Restzeit: ");
+		countDownLabel.setForeground(Colors.TEXT_COLOR);
+		countDownLabel.setBackground(Colors.BG_COLOR);
+		countDownLabel.setOpaque(true);
+		return countDownLabel;
+	}
+
+	private JPanel getFormInputPanel()
+	{
+		if (formInputPanel == null)
+		{
+			createLabels();
+
+			formInputPanel = new JPanel();
+			formInputPanel.setOpaque(false);
+			formInputPanel.add(hourLabel);
+			formInputPanel.add(l1);
+			formInputPanel.add(minuteLabel);
+			formInputPanel.add(l2);
+			formInputPanel.add(secondLabel);
+		}
+		return formInputPanel;
+	}
+
+	private JComboBox<String> getHInputBox()
+	{
+		if (hBox == null)
+		{
+			hBox = new JComboBox<>(h);
+			hBox.addKeyListener(getKA());
+			hBox.setSelectedItem(Time.DF.format(Time.LDT_NOW.getHour()) + "");
+
+		}
+		return hBox;
 	}
 
 	private JPanel getInputPanel()
