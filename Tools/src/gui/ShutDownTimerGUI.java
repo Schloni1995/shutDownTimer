@@ -70,6 +70,7 @@ public class ShutDownTimerGUI extends JFrame
 	public JMenu getMenu()
 	{
 		menu = new JMenu("Optik");
+		menu.add(getBgMI());
 		return menu;
 	}
 

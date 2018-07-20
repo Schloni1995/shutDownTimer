@@ -27,7 +27,6 @@ public class BGChangeDialog extends JDialog
 
 	private JPanel chooseImagePanel;
 	private GridBagConstraints gbc;
-
 	private File[] images;
 
 	public BGChangeDialog()
