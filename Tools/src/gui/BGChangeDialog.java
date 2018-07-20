@@ -18,6 +18,7 @@ import javax.swing.JPanel;
 
 public class BGChangeDialog extends JDialog
 {
+	private static final long serialVersionUID = 1L;
 	private File[] images;
 	private JPanel chooseImagePanel;
 	private GridBagConstraints gbc;
