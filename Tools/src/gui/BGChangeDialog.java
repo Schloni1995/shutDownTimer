@@ -16,6 +16,9 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import constants.Paths;
+import operations.TxtWriter;
+
 public class BGChangeDialog extends JDialog
 {
 	private static final long serialVersionUID = 1L;
@@ -67,6 +70,7 @@ public class BGChangeDialog extends JDialog
 			final Image img = new ImageIcon(imagePath).getImage().getScaledInstance(100, 100, Image.SCALE_FAST);
 			final ImageIcon icon = new ImageIcon(img);
 			final JLabel imageContainer = getImageContainer(icon);
+			imageContainer.setName(imagePath);
 			setGBC(x++, y);
 			chooseImagePanel.add(imageContainer, gbc);
 		}
@@ -108,7 +112,8 @@ public class BGChangeDialog extends JDialog
 			@Override
 			public void mouseReleased(final MouseEvent e)
 			{
-				// TODO Auto-generated method stub
+				l = (JLabel) e.getComponent();
+				TxtWriter.createTxtFile(new File(Paths.SETTINGS),l.getName());
 
 			}
 		};
