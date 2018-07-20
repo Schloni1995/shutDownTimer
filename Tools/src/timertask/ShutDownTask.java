@@ -52,7 +52,7 @@ public class ShutDownTask extends TimerTask
 	@Override
 	public void run()
 	{
-		LOG.info(h + " " + m + " " + " " + s);
+		ShutDownTask.LOG.info(h + " " + m + " " + " " + s);
 
 		if (tab1 != null) tab1.setCountDownText(h + " Stunden " + m + " Minuten " + s + " Sekunden");
 		else if (tab2 != null) tab2.setCountDownText(h + " Stunden " + m + " Minuten " + s + " Sekunden");

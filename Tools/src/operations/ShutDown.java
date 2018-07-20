@@ -12,8 +12,8 @@ public class ShutDown
 	public ShutDown(final int tNow)
 	{
 		final String cmd = "shutdown -s -t " + tNow;
-		LOG.finer(Messages.SHUTDOWN_MESSAGE);
-		LOG.info("Command ->" + cmd);
+		ShutDown.LOG.finer(Messages.SHUTDOWN_MESSAGE);
+		ShutDown.LOG.info("Command ->" + cmd);
 		try
 		{
 			Runtime.getRuntime().exec(cmd);
@@ -21,7 +21,7 @@ public class ShutDown
 		catch (final IOException e)
 		{
 			e.printStackTrace();
-			LOG.severe(e.getMessage());
+			ShutDown.LOG.severe(e.getMessage());
 		}
 	}
 }

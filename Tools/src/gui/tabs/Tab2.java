@@ -25,27 +25,27 @@ import operations.StopTimer;
 
 public class Tab2 extends JPanel
 {
-	private static final Logger LOG = Logger.getLogger(Tab2.class.getName());
 	private static final int FONT_SIZE = 16;
+	private static final Logger LOG = Logger.getLogger(Tab2.class.getName());
 	/** Tab2 Zeitpunkt */
 	private static final long serialVersionUID = 1347L;
 	private JPanel contentMidPanel;
-	private JPanel formInputPanel;
-	private JPanel inputPanel;
 	private JLabel countDownLabel;
-	private JLabel l1, l2, hourLabel, minuteLabel, secondLabel;
-	private Vector<String> h, min, s;
-	private JComboBox<String> hBox, minBox, sBox;
-
 	private final DecimalFormat df = Time.DF;
-	private GridBagLayout gbL;
+	private JPanel formInputPanel;
 	private GridBagConstraints gbC;
+	private GridBagLayout gbL;
+	private Vector<String> h, min, s;
+
+	private JComboBox<String> hBox, minBox, sBox;
+	private JPanel inputPanel;
+	private JLabel l1, l2, hourLabel, minuteLabel, secondLabel;
 
 	/** Konstruktor für den zweiten Tab<br>
 	 * Zeitpunktbestimmung */
 	public Tab2()
 	{
-		LOG.info("Tab2 wird geladen");
+		Tab2.LOG.info("Tab2 wird geladen");
 		initArray();
 		setOpaque(false);
 
@@ -63,23 +63,23 @@ public class Tab2 extends JPanel
 
 		l1.setBackground(Colors.BG_COLOR);
 		l1.setOpaque(true);
-		l1.setFont(new Font(Font.SANS_SERIF, Font.BOLD, FONT_SIZE));
+		l1.setFont(new Font(Font.SANS_SERIF, Font.BOLD, Tab2.FONT_SIZE));
 
 		l2.setBackground(Colors.BG_COLOR);
 		l2.setOpaque(true);
-		l2.setFont(new Font(Font.SANS_SERIF, Font.BOLD, FONT_SIZE));
+		l2.setFont(new Font(Font.SANS_SERIF, Font.BOLD, Tab2.FONT_SIZE));
 
 		// hourLabel.setBackground(Colors.BG_COLOR);
 		hourLabel.setOpaque(true);
-		hourLabel.setFont(new Font(Font.SANS_SERIF, Font.BOLD, FONT_SIZE));
+		hourLabel.setFont(new Font(Font.SANS_SERIF, Font.BOLD, Tab2.FONT_SIZE));
 
 		// minuteLabel.setBackground(Colors.BG_COLOR);
 		minuteLabel.setOpaque(true);
-		minuteLabel.setFont(new Font(Font.SANS_SERIF, Font.BOLD, FONT_SIZE));
+		minuteLabel.setFont(new Font(Font.SANS_SERIF, Font.BOLD, Tab2.FONT_SIZE));
 
 		// secondLabel.setBackground(Colors.BG_COLOR);
 		secondLabel.setOpaque(true);
-		secondLabel.setFont(new Font(Font.SANS_SERIF, Font.BOLD, FONT_SIZE));
+		secondLabel.setFont(new Font(Font.SANS_SERIF, Font.BOLD, Tab2.FONT_SIZE));
 
 	}
 
@@ -131,11 +131,11 @@ public class Tab2 extends JPanel
 			final JLabel la1 = new JLabel(":");
 			la1.setBackground(Colors.BG_COLOR);
 			la1.setOpaque(true);
-			la1.setFont(new Font(Font.SANS_SERIF, Font.BOLD, FONT_SIZE + 2));
+			la1.setFont(new Font(Font.SANS_SERIF, Font.BOLD, Tab2.FONT_SIZE + 2));
 			final JLabel la2 = new JLabel(":");
 			la2.setBackground(Colors.BG_COLOR);
 			la2.setOpaque(true);
-			la2.setFont(new Font(Font.SANS_SERIF, Font.BOLD, FONT_SIZE + 2));
+			la2.setFont(new Font(Font.SANS_SERIF, Font.BOLD, Tab2.FONT_SIZE + 2));
 			inputPanel.add(la1);
 			inputPanel.add(getMinInputBox());
 			inputPanel.add(la2);
@@ -155,7 +155,7 @@ public class Tab2 extends JPanel
 			{
 				if (ke.getKeyCode() == KeyEvent.VK_ENTER)
 				{
-					LOG.info("Now: " + Time.LDT_NOW.toString());
+					Tab2.LOG.info("Now: " + Time.LDT_NOW.toString());
 					LocalDateTime ldt = null;
 					try
 					{
@@ -167,17 +167,17 @@ public class Tab2 extends JPanel
 						minute = Integer.parseInt(minBox.getSelectedItem().toString());
 						second = Integer.parseInt(sBox.getSelectedItem().toString());
 						ldt = LocalDateTime.of(year, month, dayOfMonth, hour, minute, second);
-						LOG.info("Target: " + ldt.toString());
+						Tab2.LOG.info("Target: " + ldt.toString());
 					}
 					catch (final DateTimeException e)
 					{
-						LOG.severe(e.getMessage());
+						Tab2.LOG.severe(e.getMessage());
 						System.exit(0);
 					}
 					final int h = ldt.getHour();
 					final int m = ldt.getMinute();
 					final int s = ldt.getSecond();
-					LOG.fine("Uhrzeit: " + df.format(h) + ":" + df.format(m) + ":" + df.format(s));
+					Tab2.LOG.fine("Uhrzeit: " + df.format(h) + ":" + df.format(m) + ":" + df.format(s));
 
 					final String msg = "Soll der Rechner " + df.format(h) + ":" + df.format(m) + ":" + df.format(s)
 							+ " Uhr heruntergefahren werden?";
@@ -186,14 +186,14 @@ public class Tab2 extends JPanel
 					else
 					{
 						JOptionPane.showMessageDialog(Tab2.this, Messages.NOT_SHUTDOWN_MESSAGE);
-						LOG.info(Messages.NOT_SHUTDOWN_MESSAGE);
+						Tab2.LOG.info(Messages.NOT_SHUTDOWN_MESSAGE);
 					}
 
 				}
 				else if (ke.getKeyCode() == KeyEvent.VK_ESCAPE) if (timer != null)
 				{
 					new StopTimer(timer);
-					LOG.info(Messages.ESCAPE_MESSAGE);
+					Tab2.LOG.info(Messages.ESCAPE_MESSAGE);
 					JOptionPane.showMessageDialog(Tab2.this, Messages.ESCAPE_MESSAGE);
 				}
 				else

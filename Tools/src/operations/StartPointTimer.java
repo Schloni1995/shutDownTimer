@@ -23,18 +23,18 @@ public class StartPointTimer
 	 */
 	public StartPointTimer(final Tab2 tab, final LocalDateTime targetTime)
 	{
-		LOG.fine(Messages.TIMER_START_MESSAGE);
+		StartPointTimer.LOG.fine(Messages.TIMER_START_MESSAGE);
 		timer = new Timer();
 		timeDiff = new TimeDiff(targetTime, Time.LDT_NOW);
 		cdH = timeDiff.getCdH();
 		cdMin = timeDiff.getCdMin();
 		cdS = timeDiff.getCdS();
-		LOG.info("TimeDiff " + cdH + " Hours " + cdMin + " Minutes " + cdS + " Seconds");
+		StartPointTimer.LOG.info("TimeDiff " + cdH + " Hours " + cdMin + " Minutes " + cdS + " Seconds");
 		timer.schedule(new ShutDownTask(cdH, cdMin, cdS, tab), 0, 1000);
 
 		// TODO Falsches Kommando
 		final int duration = new Converter("", (cdH * 3600) + (cdMin * 60) + cdS).getDurationInSec();
-		LOG.info("Shutdown in " + duration + " Seconds");
+		StartPointTimer.LOG.info("Shutdown in " + duration + " Seconds");
 		new ShutDown(duration);
 	}
 

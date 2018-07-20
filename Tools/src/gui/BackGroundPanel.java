@@ -14,15 +14,17 @@ import constants.Paths;
 
 public class BackGroundPanel extends JPanel
 {
-	private static final long serialVersionUID = 1L;
 	private static final Logger LOG = Logger.getLogger(BackGroundPanel.class.getName());
+	private static final long serialVersionUID = 1L;
 	Image img = null;
 
 	public BackGroundPanel()
 	{
 		final MediaTracker mt = new MediaTracker(this);
-		final String path = this.getClass().getClassLoader().getResource(Paths.BACKGROUND2).getFile();
-		LOG.info("Imagepath:" + path);
+		final String path = this.getClass().getClassLoader().getResource(Paths.BACKGROUND2).toString()
+				.replace("file:/", "").replace("%20", " ");
+
+		BackGroundPanel.LOG.info("Imagepath: " + path);
 
 		final File f = new File(path);
 		if (f.exists())
@@ -35,7 +37,7 @@ public class BackGroundPanel extends JPanel
 			}
 			catch (final InterruptedException e)
 			{
-				LOG.severe(e.getMessage());
+				BackGroundPanel.LOG.severe(e.getMessage());
 			}
 
 			int w, h;
@@ -43,7 +45,7 @@ public class BackGroundPanel extends JPanel
 			h = (int) (img.getHeight(null) * 0.3);
 			setPreferredSize(new Dimension(w, h));
 
-			LOG.info("Image-Dimension: " + w + "x" + h);
+			BackGroundPanel.LOG.info("Image-Dimension: " + w + "x" + h);
 		}
 
 	}

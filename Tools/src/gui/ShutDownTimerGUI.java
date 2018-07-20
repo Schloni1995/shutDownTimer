@@ -10,6 +10,9 @@ import java.util.logging.Logger;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.UIManager;
@@ -26,8 +29,11 @@ public class ShutDownTimerGUI extends JFrame
 	private Tab1 tab1;
 	private Tab2 tab2;
 	private JTabbedPane tabbedPane;
-	private JPanel timePanel;
 	private JLabel timeLabel;
+	private JPanel timePanel;
+	private JMenuBar menubar;
+	private JMenu menu;
+	private JMenuItem bgMI;
 
 	/** Konstruktor für die GUI<br>
 	 * Oberflächenklasse */
@@ -41,6 +47,7 @@ public class ShutDownTimerGUI extends JFrame
 		getContentPane().setLayout(new BorderLayout());
 		add(getTimePanel(), BorderLayout.NORTH);
 		add(getTabbedPane(), BorderLayout.CENTER);
+		setJMenuBar(getMenubar());
 
 		setVisible(true);
 		pack();
@@ -102,6 +109,32 @@ public class ShutDownTimerGUI extends JFrame
 			timePanel.setOpaque(false);
 		}
 		return timePanel;
+	}
+
+	/** @return the menubar */
+	public JMenuBar getMenubar()
+	{
+		menubar = new JMenuBar();
+		menubar.add(getMenu());
+		return menubar;
+	}
+
+	/** @return the menu */
+	public JMenu getMenu()
+	{
+		menu = new JMenu("Optik");
+		return menu;
+	}
+
+	/** @return the bgMI */
+	public JMenuItem getBgMI()
+	{
+		bgMI = new JMenuItem("Hintergrund ändern");
+		bgMI.addActionListener(e ->
+		{
+			
+		});
+		return bgMI;
 	}
 
 }

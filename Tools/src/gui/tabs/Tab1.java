@@ -110,7 +110,7 @@ public class Tab1 extends JPanel
 					final float cdS = conv.getCdS();
 					final int durationInSec = conv.getDurationInSec();
 
-					LOG.fine(cdH + " " + cdMin + " " + cdS);
+					Tab1.LOG.fine(cdH + " " + cdMin + " " + cdS);
 					final String msg = "Soll der Rechner in " + timeString + " " + unitString + " herunterfahren?";
 					final int response = JOptionPane.showConfirmDialog(null, msg, "Sicher?", JOptionPane.YES_NO_OPTION);
 

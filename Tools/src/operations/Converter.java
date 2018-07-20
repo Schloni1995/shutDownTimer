@@ -7,7 +7,7 @@ public class Converter
 
 	public Converter(final String unit, final int durationInSec)
 	{
-		this.durInS = durationInSec;
+		durInS = durationInSec;
 		switch (unit)
 		{
 			case "Stunden":
