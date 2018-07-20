@@ -26,14 +26,14 @@ public class ShutDownTimerGUI extends JFrame
 {
 	private static final Logger LOG = Logger.getLogger(ShutDownTimerGUI.class.getName());
 	private static final long serialVersionUID = -1219716251617291329L;
+	private JMenuItem bgMI;
+	private JMenu menu;
+	private JMenuBar menubar;
 	private Tab1 tab1;
 	private Tab2 tab2;
 	private JTabbedPane tabbedPane;
 	private JLabel timeLabel;
 	private JPanel timePanel;
-	private JMenuBar menubar;
-	private JMenu menu;
-	private JMenuItem bgMI;
 
 	/** Konstruktor für die GUI<br>
 	 * Oberflächenklasse */
@@ -53,6 +53,32 @@ public class ShutDownTimerGUI extends JFrame
 		pack();
 
 		tab1.getTimeField().requestFocus();
+	}
+
+	/** @return the bgMI */
+	public JMenuItem getBgMI()
+	{
+		bgMI = new JMenuItem("Hintergrund ändern");
+		bgMI.addActionListener(e ->
+		{
+
+		});
+		return bgMI;
+	}
+
+	/** @return the menu */
+	public JMenu getMenu()
+	{
+		menu = new JMenu("Optik");
+		return menu;
+	}
+
+	/** @return the menubar */
+	public JMenuBar getMenubar()
+	{
+		menubar = new JMenuBar();
+		menubar.add(getMenu());
+		return menubar;
 	}
 
 	public Tab1 getTab1()
@@ -109,32 +135,6 @@ public class ShutDownTimerGUI extends JFrame
 			timePanel.setOpaque(false);
 		}
 		return timePanel;
-	}
-
-	/** @return the menubar */
-	public JMenuBar getMenubar()
-	{
-		menubar = new JMenuBar();
-		menubar.add(getMenu());
-		return menubar;
-	}
-
-	/** @return the menu */
-	public JMenu getMenu()
-	{
-		menu = new JMenu("Optik");
-		return menu;
-	}
-
-	/** @return the bgMI */
-	public JMenuItem getBgMI()
-	{
-		bgMI = new JMenuItem("Hintergrund ändern");
-		bgMI.addActionListener(e ->
-		{
-			
-		});
-		return bgMI;
 	}
 
 }

@@ -19,14 +19,16 @@ import javax.swing.JPanel;
 public class BGChangeDialog extends JDialog
 {
 	private static final long serialVersionUID = 1L;
-	private File[] images;
-	private JPanel chooseImagePanel;
-	private GridBagConstraints gbc;
 
-	public static void main(String[] args)
+	public static void main(final String[] args)
 	{
 		new BGChangeDialog().setVisible(true);
 	}
+
+	private JPanel chooseImagePanel;
+	private GridBagConstraints gbc;
+
+	private File[] images;
 
 	public BGChangeDialog()
 	{
@@ -35,18 +37,13 @@ public class BGChangeDialog extends JDialog
 		{
 			images = getImages(findPathInfo());
 		}
-		catch (IOException e)
+		catch (final IOException e)
 		{
 			e.printStackTrace();
 		}
 		setTitle("Hintergrund auswählen");
 		setContentPane(getChooseImagePanel());
 		pack();
-	}
-
-	private File[] getImages(String imagePath)
-	{
-		return new File(imagePath).listFiles();
 	}
 
 	private String findPathInfo() throws IOException
@@ -63,24 +60,30 @@ public class BGChangeDialog extends JDialog
 			chooseImagePanel.setLayout(new GridBagLayout());
 		}
 
-		int x = 1, y = 0;
-		for (File imageFile : images)
+		int x = 1;
+		final int y = 0;
+		for (final File imageFile : images)
 		{
-			String imagePath = imageFile.getAbsolutePath();
-			Image img = new ImageIcon(imagePath).getImage().getScaledInstance(100, 100, Image.SCALE_FAST);
-			ImageIcon icon = new ImageIcon(img);
-			JLabel imageContainer = getImageContainer(icon);
+			final String imagePath = imageFile.getAbsolutePath();
+			final Image img = new ImageIcon(imagePath).getImage().getScaledInstance(100, 100, Image.SCALE_FAST);
+			final ImageIcon icon = new ImageIcon(img);
+			final JLabel imageContainer = getImageContainer(icon);
 			setGBC(x++, y);
 			chooseImagePanel.add(imageContainer, gbc);
 		}
 		return chooseImagePanel;
 	}
 
-	private JLabel getImageContainer(ImageIcon icon)
+	private JLabel getImageContainer(final ImageIcon icon)
 	{
-		JLabel label = new JLabel(icon);
+		final JLabel label = new JLabel(icon);
 		label.addMouseListener(getMA());
 		return label;
+	}
+
+	private File[] getImages(final String imagePath)
+	{
+		return new File(imagePath).listFiles();
 	}
 
 	private MouseListener getMA()
@@ -90,24 +93,24 @@ public class BGChangeDialog extends JDialog
 			private JLabel l;
 
 			@Override
-			public void mouseReleased(MouseEvent e)
+			public void mouseEntered(final MouseEvent e)
 			{
-				// TODO Auto-generated method stub
-
+				l = (JLabel) e.getComponent();
+				l.setBorder(BorderFactory.createLineBorder(Color.BLACK, 5));
 			}
 
 			@Override
-			public void mouseExited(MouseEvent e)
+			public void mouseExited(final MouseEvent e)
 			{
 				l = (JLabel) e.getComponent();
 				l.setBorder(BorderFactory.createEmptyBorder());
 			}
 
 			@Override
-			public void mouseEntered(MouseEvent e)
+			public void mouseReleased(final MouseEvent e)
 			{
-				l = (JLabel) e.getComponent();
-				l.setBorder(BorderFactory.createLineBorder(Color.BLACK, 5));
+				// TODO Auto-generated method stub
+
 			}
 		};
 	}
