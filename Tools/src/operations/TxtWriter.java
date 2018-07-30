@@ -8,20 +8,20 @@ import java.io.PrintWriter;
 
 import javax.swing.JOptionPane;
 
+import constants.Messages;
 import constants.Paths;
 
 public class TxtWriter
 {
 	public static void createTxtFile(final File zielPfad, final String imagePath)
 	{
-		if (zielPfad.exists())
+		if (zielPfad.getParentFile().exists())
 		{
 			PrintWriter pWriter = null;
 			try
 			{
 				pWriter = new PrintWriter(new BufferedWriter(new FileWriter(zielPfad)));
-				pWriter.println("Imagepath: " + imagePath);
-				pWriter.println();
+				pWriter.println("<Imagepath> " + imagePath);
 
 			}
 			catch (final IOException ioe)
@@ -40,8 +40,10 @@ public class TxtWriter
 		else
 		{
 			File f = new File(zielPfad.getParent());
-			if (f.mkdir()) createTxtFile(new File(Paths.SETTINGS), imagePath);
-			else JOptionPane.showMessageDialog(null, "Erstelle bitte die entsprechende Ordnerstruktur:\r\n"+Paths.SETTINGS+"\r\nVersuch es nochmal!", "Zielpfad konnte nicht erstellt werden",JOptionPane.ERROR_MESSAGE);
+			if (f.mkdirs()) createTxtFile(new File(Paths.SETTINGS), imagePath);
+			else
+				JOptionPane.showMessageDialog(null, String.format(Messages.FILECREATION, zielPfad.getParent()),
+						"Zielpfad konnte nicht erstellt werden", JOptionPane.ERROR_MESSAGE);
 		}
 
 	}

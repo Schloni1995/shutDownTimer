@@ -18,9 +18,11 @@ import javax.swing.JTabbedPane;
 import javax.swing.UIManager;
 
 import constants.Colors;
+import constants.Paths;
 import constants.Time;
 import gui.tabs.Tab1;
 import gui.tabs.Tab2;
+import operations.TxtReader;
 
 public class ShutDownTimerGUI extends JFrame
 {
@@ -34,6 +36,7 @@ public class ShutDownTimerGUI extends JFrame
 	private JTabbedPane tabbedPane;
 	private JLabel timeLabel;
 	private JPanel timePanel;
+	private BackGroundPanel backgroundPanel;
 
 	/** Konstruktor für die GUI<br>
 	 * Oberflächenklasse */
@@ -43,7 +46,8 @@ public class ShutDownTimerGUI extends JFrame
 		setTitle("ShutDownTimer");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-		setContentPane(new BackGroundPanel());
+		backgroundPanel = new BackGroundPanel(Paths.BACKGROUND2);
+		setContentPane(backgroundPanel);
 		getContentPane().setLayout(new BorderLayout());
 		add(getTimePanel(), BorderLayout.NORTH);
 		add(getTabbedPane(), BorderLayout.CENTER);
@@ -61,9 +65,19 @@ public class ShutDownTimerGUI extends JFrame
 		bgMI = new JMenuItem("Hintergrund ändern");
 		bgMI.addActionListener(e ->
 		{
-
+			new BGChangeDialog().setVisible(true);
+			setNewBackground();
 		});
 		return bgMI;
+	}
+
+	private void setNewBackground()
+	{
+		String newImagePath = TxtReader.getChosenImagePath(Paths.SETTINGS);
+		remove(backgroundPanel);
+		backgroundPanel = new BackGroundPanel(newImagePath);
+		setContentPane(backgroundPanel);
+		revalidate();
 	}
 
 	/** @return the menu */

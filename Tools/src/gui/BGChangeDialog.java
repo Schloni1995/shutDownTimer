@@ -113,10 +113,17 @@ public class BGChangeDialog extends JDialog
 			public void mouseReleased(final MouseEvent e)
 			{
 				l = (JLabel) e.getComponent();
-				TxtWriter.createTxtFile(new File(Paths.SETTINGS),l.getName());
+				File settingsFile = new File(Paths.SETTINGS);
 
+				TxtWriter.createTxtFile(settingsFile, l.getName());
+				closeDialog();
 			}
 		};
+	}
+
+	public void closeDialog()
+	{
+		dispose();
 	}
 
 	private void setGBC(int x, int y)
