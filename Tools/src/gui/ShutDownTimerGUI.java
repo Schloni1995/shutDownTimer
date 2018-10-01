@@ -125,6 +125,8 @@ public class ShutDownTimerGUI extends JFrame
 		if (timeLabel == null) timeLabel = new JLabel();
 		timeLabel.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 18));
 		timeLabel.setForeground(Colors.TEXT_COLOR);
+		timeLabel.setBackground(Colors.BG_COLOR);
+		timeLabel.setOpaque(true);
 		final Timer actuallTime = new Timer();
 		final DecimalFormat df = Time.DF;
 		actuallTime.schedule(new TimerTask()
